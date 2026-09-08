@@ -81,19 +81,16 @@ portofolio/
 - [x] Setup Router & Placeholder Routes di `src/App.tsx` serta verifikasi build TypeScript.
 
 ### Fase 3: Migrasi Halaman Menjadi Komponen React (JSX)
-- [ ] Buat `src/pages/Home.tsx`:
-  - [ ] Porting Hero Banner & teks dinamis/ketik (typing effect).
-  - [ ] Porting partner/tech logos.
-  - [ ] Porting section About preview & Progress bars.
-  - [ ] Render galeri proyek secara dinamis dari `src/data/projects.ts`.
-- [ ] Buat `src/pages/About.tsx`:
-  - [ ] Porting breadcrumb & timeline riwayat pengalaman/pendidikan.
-  - [ ] Porting skill progress section.
-- [ ] Buat `src/pages/Services.tsx`:
-  - [ ] Porting card layanan yang ditawarkan.
-- [ ] Buat `src/pages/Contact.tsx`:
-  - [ ] Porting form kontak dan info alamat/social.
-- [ ] Bersihkan file HTML lama yang sudah tidak dipakai (`about.html`, `services.html`, `contact.html`).
+- [x] Siapkan data sertifikat asli (`src/data/certificates.ts`) dan proyek (`src/data/projects.ts`).
+- [x] Buat komponen `TypingText.tsx` untuk animasi teks mengetik di Hero.
+- [x] Buat komponen `GalleryModal.tsx` sebagai pengganti lightbox pop-up jQuery.
+- [x] Buat `src/pages/Home.tsx` (Hero, Partner logos, About overview, dan Projects/Certificates gallery).
+- [x] Buat `src/pages/About.tsx` (Profil, Timeline pendidikan & pengalaman, Expertise progress bar).
+- [x] Buat `src/pages/Services.tsx` (Kartu penawaran layanan web development & galeri portofolio lengkap).
+- [x] Buat `src/pages/Contact.tsx` (Kontak detail & form kirim pesan interaktif).
+- [x] Hubungkan semua rute di `src/App.tsx`.
+- [x] Bersihkan file HTML monolitik lama (`about.html`, `services.html`, `contact.html`).
+- [x] Uji build (`npm run build`) sukses tanpa error TypeScript.
 
 ### Fase 4: Routing, Build & Otomasi GitHub Pages
 - [ ] Konfigurasi `src/App.tsx` dengan `HashRouter` atau `BrowserRouter` yang mendukung base GitHub Pages.
