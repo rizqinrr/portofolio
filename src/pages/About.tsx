@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getAssetUrl } from '../utils/assets';
 
 export default function About() {
   return (
@@ -25,7 +26,7 @@ export default function About() {
             <div className="col-lg-4">
               <div className="position-relative">
                 <img
-                  src="/portofolio/assets/jpg/foto1.jpeg"
+                  src={getAssetUrl('assets/jpg/foto1.jpeg')}
                   alt="Muhammad Rizqi Nurrahman"
                   className="radius-image img-fluid shadow"
                 />

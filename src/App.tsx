@@ -8,7 +8,7 @@ import Contact from './pages/Contact';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/portofolio">
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <div className="portfolio-app">
         <Navbar />
         <main style={{ minHeight: '80vh', paddingTop: '75px' }}>

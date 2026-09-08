@@ -1,4 +1,5 @@
 import { Project } from '../types';
+import { getAssetUrl } from '../utils/assets';
 
 export const projects: Project[] = [
   {
@@ -7,7 +8,7 @@ export const projects: Project[] = [
     description: 'Simple landing page.',
     category: 'Web Development',
     tags: ['HTML', 'CSS', 'JavaScript'],
-    image: '/portofolio/assets/jpg/port1.png',
+    image: getAssetUrl('assets/jpg/port1.png'),
     featured: true,
   },
   {
@@ -16,7 +17,7 @@ export const projects: Project[] = [
     description: 'Simple login form.',
     category: 'Web Development',
     tags: ['HTML', 'CSS', 'UI/UX'],
-    image: '/portofolio/assets/jpg/port2.png',
+    image: getAssetUrl('assets/jpg/port2.png'),
     featured: true,
   },
   {
@@ -25,7 +26,7 @@ export const projects: Project[] = [
     description: 'Platform edukasi daring untuk kursus dan pembelajaran terstruktur dengan manajemen materi interaktif.',
     category: 'Web Development',
     tags: ['PHP', 'Laravel', 'Bootstrap', 'MySQL'],
-    image: '/portofolio/assets/jpg/foto2.jpg',
+    image: getAssetUrl('assets/jpg/foto2.jpg'),
     githubUrl: 'https://github.com/rizqinrr/nurman-course',
     featured: true,
   },
@@ -35,7 +36,7 @@ export const projects: Project[] = [
     description: 'Sistem Informasi Pembelajaran Pusat Kegiatan Belajar Masyarakat untuk administrasi dan monitoring siswa.',
     category: 'Web Development',
     tags: ['Web Application', 'Database', 'Admin Dashboard'],
-    image: '/portofolio/assets/jpg/foto1.jpeg',
+    image: getAssetUrl('assets/jpg/foto1.jpeg'),
     githubUrl: 'https://github.com/rizqinrr/sip_pkbm',
     featured: true,
   },
@@ -45,7 +46,7 @@ export const projects: Project[] = [
     description: 'Solusi routing jaringan dan manajemen integrasi perangkat kamera pengawas berbasis IP.',
     category: 'Networking & System',
     tags: ['Networking', 'Scripting', 'Automation'],
-    image: '/portofolio/assets/jpg/g6.jpg',
+    image: getAssetUrl('assets/jpg/g6.jpg'),
     githubUrl: 'https://github.com/rizqinrr/nvrRouter',
     featured: false,
   },
@@ -55,8 +56,9 @@ export const projects: Project[] = [
     description: 'Halaman interaktif profil resume profesional yang responsif dan siap cetak.',
     category: 'Web Development',
     tags: ['HTML', 'CSS', 'JavaScript'],
-    image: '/portofolio/assets/jpg/g1.jpg',
+    image: getAssetUrl('assets/jpg/g1.jpg'),
     githubUrl: 'https://github.com/rizqinrr/cv',
     featured: false,
   },
 ];
+

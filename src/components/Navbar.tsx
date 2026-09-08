@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { getAssetUrl } from '../utils/assets';
 
 export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -53,7 +54,7 @@ export default function Navbar() {
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
           <Link className="navbar-brand" to="/" onClick={closeNav}>
-            <img src="/portofolio/assets/jpg/nr.png" alt="logo NR" />
+            <img src={getAssetUrl('assets/jpg/nr.png')} alt="logo NR" />
           </Link>
 
           <button

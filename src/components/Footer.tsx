@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getAssetUrl } from '../utils/assets';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -13,7 +14,7 @@ export default function Footer() {
       <div className="container pt-4">
         <div className="mx-auto" style={{ maxWidth: '600px' }}>
           <Link to="/" className="footer-logo">
-            <img src="/portofolio/assets/jpg/nr.png" alt="logo NR" />
+            <img src={getAssetUrl('assets/jpg/nr.png')} alt="logo NR" />
           </Link>
           <p className="mt-4 text-white">
             Portofolio web personal yang menampilkan proyek-proyek rekayasa perangkat lunak, eksplorasi teknologi, dan studi kasus pengembangan web.

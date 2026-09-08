@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import TypingText from '../components/TypingText';
 import GalleryModal from '../components/GalleryModal';
-import { certificates } from '../data/certificates';
 import { projects } from '../data/projects';
+import { certificates } from '../data/certificates';
+import { getAssetUrl } from '../utils/assets';
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<{
@@ -40,7 +41,7 @@ export default function Home() {
             <div className="col-md-6 text-center mt-md-0 mt-5">
               <div className="hero-image-wrapper position-relative d-inline-block">
                 <img
-                  src="/portofolio/assets/jpg/foto1.jpeg"
+                  src={getAssetUrl('assets/jpg/foto1.jpeg')}
                   alt="Muhammad Rizqi Nurrahman"
                   className="radius-image img-fluid shadow"
                   style={{
@@ -61,19 +62,19 @@ export default function Home() {
           <div className="company-logos text-center">
             <div className="row mx-auto justify-content-center align-items-center">
               <div className="col-md-2 col-sm-4 col-4 py-2">
-                <img src="/portofolio/assets/images/html.png" alt="HTML5" className="img-fluid" style={{ maxHeight: '55px' }} />
+                <img src={getAssetUrl('assets/images/html.png')} alt="HTML5" className="img-fluid" style={{ maxHeight: '55px' }} />
               </div>
               <div className="col-md-2 col-sm-4 col-4 py-2">
-                <img src="/portofolio/assets/images/css2.png" alt="CSS3" className="img-fluid" style={{ maxHeight: '55px' }} />
+                <img src={getAssetUrl('assets/images/css2.png')} alt="CSS3" className="img-fluid" style={{ maxHeight: '55px' }} />
               </div>
               <div className="col-md-2 col-sm-4 col-4 py-2">
-                <img src="/portofolio/assets/images/js2.png" alt="JavaScript" className="img-fluid" style={{ maxHeight: '55px' }} />
+                <img src={getAssetUrl('assets/images/js2.png')} alt="JavaScript" className="img-fluid" style={{ maxHeight: '55px' }} />
               </div>
               <div className="col-md-2 col-sm-4 col-4 py-2">
-                <img src="/portofolio/assets/images/php2.png" alt="PHP" className="img-fluid" style={{ maxHeight: '55px' }} />
+                <img src={getAssetUrl('assets/images/php2.png')} alt="PHP" className="img-fluid" style={{ maxHeight: '55px' }} />
               </div>
               <div className="col-md-2 col-sm-4 col-4 py-2">
-                <img src="/portofolio/assets/images/python2.png" alt="Python" className="img-fluid" style={{ maxHeight: '55px' }} />
+                <img src={getAssetUrl('assets/images/python2.png')} alt="Python" className="img-fluid" style={{ maxHeight: '55px' }} />
               </div>
             </div>
           </div>
@@ -86,7 +87,7 @@ export default function Home() {
           <div className="grids-area-hny main-cont-wthree-fea row">
             <div className="col-xl-3 col-lg-4 col-md-3 col-sm-4 text-center">
               <div className="position-relative">
-                <img src="/portofolio/assets/jpg/foto2.jpg" alt="Rizqi profile" className="radius-image img-fluid" />
+                <img src={getAssetUrl('assets/jpg/foto2.jpg')} alt="Rizqi profile" className="radius-image img-fluid" />
               </div>
             </div>
             <div className="col-xl-8 col-md-9 col-sm-8 offset-xl-1 ps-xl-0 pe-xl-5 mt-sm-0 mt-4">
@@ -137,7 +138,7 @@ export default function Home() {
           <div className="row align-items-center">
             <div className="col-lg-4">
               <div className="position-relative">
-                <img src="/portofolio/assets/jpg/foto1.jpeg" alt="" className="radius-image img-fluid" />
+                <img src={getAssetUrl('assets/jpg/foto1.jpeg')} alt="" className="radius-image img-fluid" />
               </div>
             </div>
             <div className="col-lg-8 ps-lg-5 mt-lg-0 mt-5">
