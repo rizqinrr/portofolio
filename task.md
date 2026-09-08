@@ -69,15 +69,16 @@ portofolio/
 - [x] Verifikasi tes build Vite + TypeScript (`npm run build`) berjalan sukses.
 
 ### Fase 2: Ekstraksi Komponen Global & Logic Native
-- [ ] Buat tipe data proyek di `src/types/index.ts`.
-- [ ] Buat `src/data/projects.ts` dengan template data terstruktur untuk portofolio.
-- [ ] Implementasikan `Navbar.tsx`:
-  - [ ] Porting struktur HTML navbar.
-  - [ ] Konversi logic scroll sticky header dari jQuery ke React (`useEffect`).
-  - [ ] Konversi mobile menu toggle ke state React (`useState`).
-  - [ ] Konversi Dark/Light theme toggle ke state React (sinkron dengan `data-theme` di `<html>`).
-  - [ ] Ganti navigasi `<a>` dengan `<NavLink>` / `<Link>` dari React Router.
-- [ ] Implementasikan `Footer.tsx` (reusable untuk semua halaman).
+- [x] Buat tipe data proyek di `src/types/index.ts`.
+- [x] Buat `src/data/projects.ts` dengan template data terstruktur untuk portofolio.
+- [x] Implementasikan `Navbar.tsx`:
+  - [x] Porting struktur HTML navbar.
+  - [x] Konversi logic scroll sticky header dari jQuery ke React (`useEffect`).
+  - [x] Konversi mobile menu toggle ke state React (`useState`).
+  - [x] Konversi Dark/Light theme toggle ke state React (sinkron dengan `data-theme` di `<html>`).
+  - [x] Ganti navigasi `<a>` dengan `<NavLink>` / `<Link>` dari React Router.
+- [x] Implementasikan `Footer.tsx` (reusable untuk semua halaman).
+- [x] Setup Router & Placeholder Routes di `src/App.tsx` serta verifikasi build TypeScript.
 
 ### Fase 3: Migrasi Halaman Menjadi Komponen React (JSX)
 - [ ] Buat `src/pages/Home.tsx`:
