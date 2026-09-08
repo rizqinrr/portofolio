@@ -21,7 +21,7 @@ export default function Home() {
       <section className="w3l-banner py-5" id="home">
         <div className="container py-md-5 py-4">
           <div className="row align-items-center pt-4">
-            <div className="col-md-6 banner-left pe-xl-5">
+            <div className="col-lg-8 col-md-10 banner-left pe-xl-5">
               <h4>Hi, I'm Muhammad Rizqi Nurrahman</h4>
               <h3 className="mb-3 mt-1">
                 <TypingText texts={['Traveler', 'Developer', 'Student']} />
@@ -36,20 +36,6 @@ export default function Home() {
                 <Link to="/contact" className="btn btn-style btn-style-border">
                   Hire Me
                 </Link>
-              </div>
-            </div>
-            <div className="col-md-6 text-center mt-md-0 mt-5">
-              <div className="hero-image-wrapper position-relative d-inline-block">
-                <img
-                  src={getAssetUrl('assets/jpg/foto1.jpeg')}
-                  alt="Muhammad Rizqi Nurrahman"
-                  className="radius-image img-fluid shadow"
-                  style={{
-                    maxHeight: '480px',
-                    objectFit: 'cover',
-                    border: '4px solid rgba(255, 255, 255, 0.15)',
-                  }}
-                />
               </div>
             </div>
           </div>
