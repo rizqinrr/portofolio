@@ -93,8 +93,8 @@ portofolio/
 - [x] Uji build (`npm run build`) sukses tanpa error TypeScript.
 
 ### Fase 4: Routing, Build & Otomasi GitHub Pages
-- [ ] Konfigurasi `src/App.tsx` dengan `HashRouter` atau `BrowserRouter` yang mendukung base GitHub Pages.
-- [ ] Uji build lokal (`npm run build`) dan pastikan tidak ada error TypeScript atau bundling.
-- [ ] Buat workflow GitHub Actions `.github/workflows/deploy.yml`.
-- [ ] Buat dokumentasi panduan di `README.md` (cara menjalankan lokal dan cara menambah proyek di `projects.ts`).
-- [ ] Commit dan push hasil migrasi ke GitHub.
+- [x] Konfigurasi `src/App.tsx` dengan `BrowserRouter` basename `/portofolio` dan fallback redirect SPA (`public/404.html` + `index.html`).
+- [x] Uji build lokal (`npm run build`) dan pastikan tidak ada error TypeScript atau bundling.
+- [x] Buat workflow GitHub Actions `.github/workflows/deploy.yml`.
+- [x] Buat dokumentasi panduan di `README.md` (cara menjalankan lokal dan cara menambah proyek di `projects.ts`).
+- [x] Commit dan push hasil migrasi ke GitHub.
