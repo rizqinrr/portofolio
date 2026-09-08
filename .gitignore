@@ -1,0 +1,19 @@
+# Logs & tool artifacts
+node_modules
+dist
+dist-ssr
+*.local
+.npm
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite build info
+*.tsbuildinfo
