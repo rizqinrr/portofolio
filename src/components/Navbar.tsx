@@ -95,6 +95,15 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <NavLink
+                  to="/projects"
+                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                  onClick={closeNav}
+                >
+                  Projects
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
                   to="/services"
                   className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
                   onClick={closeNav}
