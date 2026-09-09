@@ -13,7 +13,7 @@ import ContactPage from '../../pages/contents/ContactPage';
 const TOTAL_PAGES = 7;
 
 export default function BookLayout() {
-  const { smoothScrollX, scrollProgress, currentPage, goToPage, containerRef } = useHorizontalScroll({
+  const { contentX, scrollProgress, currentPage, goToPage, containerRef } = useHorizontalScroll({
     totalPages: TOTAL_PAGES,
   });
 
@@ -31,7 +31,7 @@ export default function BookLayout() {
 
       <motion.div
         className="book-pages"
-        style={{ x: smoothScrollX }}
+        style={{ x: contentX }}
       >
         <FrontCover />
         <AboutPage />

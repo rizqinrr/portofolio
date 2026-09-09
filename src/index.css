@@ -8,7 +8,6 @@
   --bg-content: #ffffff;
   --text-cover: #f3ede3;
   --text-content: #1a1a1a;
-  --text-accent: #888888;
   --text-muted: #888888;
   --border-cover: #333333;
   --border-content: #e5e5e5;
@@ -45,6 +44,7 @@ html, body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  position: relative;
 }
 
 /* ─── Sidebar (Spine) ───────────────────────────────────── */
@@ -58,7 +58,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 24px 0;
   z-index: 100;
   background: var(--bg-cover);
   border-right: 1px solid var(--border-cover);
@@ -84,17 +84,17 @@ html, body {
   color: var(--text-content);
 }
 
-/* Sticky line — flows top to bottom based on page */
+/* Sticky line — flows top to bottom based on scroll */
 .sidebar-line {
   position: absolute;
   left: 0;
   top: 0;
-  width: 1px;
+  width: 2px;
   height: 100%;
-  background: var(--text-accent);
-  opacity: 0.3;
+  background: var(--text-muted);
+  opacity: 0.4;
   transform-origin: top;
-  transition: transform var(--transition-duration) var(--transition-easing);
+  pointer-events: none;
 }
 
 .sidebar-hamburger {
@@ -104,7 +104,7 @@ html, body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px;
 }
 
 .sidebar-hamburger span {
@@ -159,125 +159,15 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+/* ─── Cover Pages (Dark) ────────────────────────────────── */
+.cover-page,
+.colophon-page {
   background: var(--bg-cover);
-}
-
-/* Content pages — white background */
-.book-page-content {
-  background: var(--bg-content);
-  color: var(--text-content);
-}
-
-.book-page-content .chapter-label {
-  color: #999999;
-}
-
-.book-page-content .about-paragraph {
-  color: var(--text-content);
-}
-
-.book-page-content .about-pullquote {
-  color: #666666;
-  border-left-color: var(--border-content);
-}
-
-.book-page-content .skills-category-title {
-  color: #999999;
-}
-
-.book-page-content .skills-item {
-  color: var(--text-content);
-}
-
-.book-page-content .project-item {
-  border-bottom-color: transparent;
-}
-
-.book-page-content .project-item:hover {
-  border-bottom-color: var(--border-content);
-}
-
-.book-page-content .project-number {
-  color: #999999;
-}
-
-.book-page-content .project-name {
-  color: var(--text-content);
-}
-
-.book-page-content .project-phrase {
-  color: #999999;
-}
-
-.book-page-content .experience-item {
-  border-bottom-color: var(--border-content);
-}
-
-.book-page-content .experience-item:first-child {
-  border-top-color: var(--border-content);
-}
-
-.book-page-content .experience-year {
-  color: #999999;
-}
-
-.book-page-content .experience-company {
-  color: var(--text-content);
-}
-
-.book-page-content .experience-role {
-  color: #666666;
-}
-
-.book-page-content .contact-email {
-  color: var(--text-content);
-}
-
-.book-page-content .contact-email:hover {
-  color: #666666;
-}
-
-.book-page-content .contact-social {
-  color: #666666;
-}
-
-.book-page-content .contact-social:hover {
-  color: var(--text-content);
-}
-
-/* ─── Page Indicator ────────────────────────────────────── */
-.book-page-indicator {
-  position: absolute;
-  bottom: var(--spacing-unit);
-  right: var(--spacing-unit);
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  color: var(--text-content);
-  z-index: 10;
-}
-
-/* ─── Chapter Label ─────────────────────────────────────── */
-.chapter-label {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: lowercase;
-  color: var(--text-accent);
-  position: absolute;
-  top: var(--spacing-unit);
-  left: var(--spacing-unit);
-}
-
-/* ─── Cover Page ────────────────────────────────────────── */
-.cover-page {
-  display: flex;
-  flex-direction: column;
+  color: var(--text-cover);
   justify-content: center;
   padding: 0 var(--spacing-unit);
-  position: relative;
 }
 
 .cover-content {
@@ -318,7 +208,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px var(--spacing-unit);
+  padding: 24px var(--spacing-unit);
 }
 
 .cover-bottom-left,
@@ -339,16 +229,52 @@ html, body {
   letter-spacing: 0.02em;
 }
 
-/* ─── About Page ────────────────────────────────────────── */
-.about-page {
-  display: flex;
-  flex-direction: column;
+/* ─── Colophon (Back Cover) ─────────────────────────────── */
+.colophon-content {
+  max-width: 400px;
+}
+
+.colophon-line {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 2;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.colophon-closing {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: calc(var(--spacing-unit) * 0.6);
+}
+
+/* ─── Content Pages (White Background) ──────────────────── */
+.book-page-content {
+  background: var(--bg-content);
+  color: var(--text-content);
   justify-content: center;
   padding: 0 var(--spacing-unit);
 }
 
+.book-page-content .chapter-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: #888888;
+  position: absolute;
+  top: var(--spacing-unit);
+  left: var(--spacing-unit);
+}
+
+/* About Page */
 .about-content {
-  max-width: 520px;
+  max-width: 540px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -358,7 +284,7 @@ html, body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.8;
-  color: var(--text-cover);
+  color: var(--text-content);
   margin-bottom: calc(var(--spacing-unit) * 0.4);
 }
 
@@ -368,25 +294,20 @@ html, body {
   font-weight: 400;
   font-style: italic;
   line-height: 1.6;
-  color: var(--text-accent);
+  color: #555555;
   margin-top: calc(var(--spacing-unit) * 0.8);
   padding-left: calc(var(--spacing-unit) * 0.5);
-  border-left: 1px solid var(--border-cover);
+  border-left: 1px solid var(--border-content);
 }
 
-/* ─── Skills Page ───────────────────────────────────────── */
-.skills-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--spacing-unit);
-}
-
+/* Skills Page */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: calc(var(--spacing-unit) * 1);
   max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .skills-category {
@@ -401,7 +322,7 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: lowercase;
-  color: var(--text-accent);
+  color: #888888;
   margin-bottom: calc(var(--spacing-unit) * 0.2);
 }
 
@@ -410,29 +331,24 @@ html, body {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8;
-  color: var(--text-cover);
+  color: var(--text-content);
 }
 
-/* ─── Projects Page ─────────────────────────────────────── */
-.projects-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--spacing-unit);
-}
-
+/* Projects Page */
 .projects-list {
   display: flex;
   flex-direction: column;
   gap: calc(var(--spacing-unit) * 0.1);
-  max-width: 600px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-item {
   display: flex;
   align-items: baseline;
   gap: calc(var(--spacing-unit) * 0.3);
-  padding: calc(var(--spacing-unit) * 0.15) 0;
+  padding: calc(var(--spacing-unit) * 0.18) 0;
   border-bottom: 1px solid transparent;
   transition: border-color 200ms ease;
   cursor: pointer;
@@ -441,14 +357,14 @@ html, body {
 }
 
 .project-item:hover {
-  border-bottom-color: var(--border-cover);
+  border-bottom-color: var(--border-content);
 }
 
 .project-number {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 400;
-  color: var(--text-muted);
+  color: #999999;
   min-width: 24px;
   letter-spacing: 0.05em;
 }
@@ -457,7 +373,7 @@ html, body {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
-  color: var(--text-cover);
+  color: var(--text-content);
   letter-spacing: 0.01em;
 }
 
@@ -465,12 +381,11 @@ html, body {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-muted);
+  color: #777777;
   margin-left: auto;
   letter-spacing: 0.01em;
 }
 
-/* Floating image preview */
 .project-preview {
   position: fixed;
   pointer-events: none;
@@ -480,6 +395,7 @@ html, body {
   width: 280px;
   height: 180px;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .project-preview.visible {
@@ -492,37 +408,32 @@ html, body {
   object-fit: cover;
 }
 
-/* ─── Experience Page ───────────────────────────────────── */
-.experience-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--spacing-unit);
-}
-
+/* Experience Page */
 .experience-list {
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .experience-item {
   display: flex;
   align-items: baseline;
   padding: calc(var(--spacing-unit) * 0.35) 0;
-  border-bottom: 1px solid var(--border-cover);
+  border-bottom: 1px solid var(--border-content);
 }
 
 .experience-item:first-child {
-  border-top: 1px solid var(--border-cover);
+  border-top: 1px solid var(--border-content);
 }
 
 .experience-year {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-muted);
-  min-width: 80px;
+  color: #888888;
+  min-width: 90px;
   letter-spacing: 0.05em;
 }
 
@@ -536,37 +447,30 @@ html, body {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
-  color: var(--text-cover);
+  color: var(--text-content);
 }
 
 .experience-role {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
-  color: var(--text-accent);
+  color: #666666;
 }
 
-/* ─── Contact Page ──────────────────────────────────────── */
-.contact-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--spacing-unit);
-}
-
+/* Contact Page */
 .contact-email {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--text-cover);
+  color: var(--text-content);
   text-decoration: none;
   transition: color 200ms ease;
 }
 
 .contact-email:hover {
-  color: var(--text-accent);
+  color: #666666;
 }
 
 .contact-socials {
@@ -581,43 +485,26 @@ html, body {
   font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: lowercase;
-  color: var(--text-accent);
+  color: #666666;
   text-decoration: none;
   transition: color 200ms ease;
 }
 
 .contact-social:hover {
-  color: var(--text-cover);
+  color: var(--text-content);
 }
 
-/* ─── Colophon Page ─────────────────────────────────────── */
-.colophon-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 var(--spacing-unit);
-}
-
-.colophon-content {
-  max-width: 400px;
-}
-
-.colophon-line {
+/* ─── Page Indicator ────────────────────────────────────── */
+.book-page-indicator {
+  position: absolute;
+  bottom: var(--spacing-unit);
+  right: var(--spacing-unit);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 2;
-  color: var(--text-accent);
-  letter-spacing: 0.02em;
-}
-
-.colophon-closing {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--text-muted);
-  margin-top: calc(var(--spacing-unit) * 0.6);
+  letter-spacing: 0.1em;
+  color: var(--text-content);
+  z-index: 10;
 }
 
 /* ─── Responsive ────────────────────────────────────────── */
@@ -637,7 +524,7 @@ html, body {
   }
 
   .cover-name {
-    font-size: clamp(1.5rem, 7vw, 4rem);
+    font-size: clamp(1.8rem, 8vw, 4rem);
     letter-spacing: -0.04em;
   }
 
