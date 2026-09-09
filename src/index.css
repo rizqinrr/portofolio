@@ -4,13 +4,14 @@
 
 /* ─── Design Tokens ─────────────────────────────────────── */
 :root {
-  --bg-dark: #1a1a1a;
-  --bg-light: #ffffff;
-  --text-primary: #f3ede3;
-  --text-dark: #1a1a1a;
+  --bg-cover: #222222;
+  --bg-content: #ffffff;
+  --text-cover: #f3ede3;
+  --text-content: #1a1a1a;
   --text-accent: #888888;
   --text-muted: #888888;
-  --border: #333333;
+  --border-cover: #333333;
+  --border-content: #e5e5e5;
   --sidebar-width: 62px;
   --spacing-unit: 50px;
   --font-heading: 'Playfair Display', 'PP Editorial Old', serif;
@@ -30,8 +31,8 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  background: var(--bg-dark);
-  color: var(--text-primary);
+  background: var(--bg-cover);
+  color: var(--text-cover);
   font-family: var(--font-body);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -59,19 +60,19 @@ html, body {
   justify-content: space-between;
   padding: 16px 0;
   z-index: 100;
-  background: var(--bg-dark);
-  border-right: 1px solid var(--border);
+  background: var(--bg-cover);
+  border-right: 1px solid var(--border-cover);
   transition: background var(--transition-duration) var(--transition-easing),
               border-color var(--transition-duration) var(--transition-easing);
 }
 
 .book-sidebar.light {
-  background: var(--bg-light);
-  border-right-color: #e0e0e0;
+  background: var(--bg-content);
+  border-right-color: var(--border-content);
 }
 
 .book-sidebar.light .sidebar-hamburger span {
-  background: var(--text-dark);
+  background: var(--text-content);
 }
 
 .book-sidebar.light .sidebar-top,
@@ -80,7 +81,7 @@ html, body {
 }
 
 .book-sidebar.light .sidebar-center {
-  color: var(--text-dark);
+  color: var(--text-content);
 }
 
 /* Sticky line — flows top to bottom based on page */
@@ -110,7 +111,7 @@ html, body {
   display: block;
   width: 18px;
   height: 1.5px;
-  background: var(--text-primary);
+  background: var(--text-cover);
   transition: background var(--transition-duration) var(--transition-easing);
 }
 
@@ -133,7 +134,7 @@ html, body {
 .sidebar-center {
   font-size: 11px;
   letter-spacing: 0.2em;
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 .sidebar-bottom {
@@ -158,12 +159,90 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--bg-dark);
+  background: var(--bg-cover);
 }
 
-.book-page.light {
-  background: var(--bg-light);
-  color: var(--text-dark);
+/* Content pages — white background */
+.book-page-content {
+  background: var(--bg-content);
+  color: var(--text-content);
+}
+
+.book-page-content .chapter-label {
+  color: #999999;
+}
+
+.book-page-content .about-paragraph {
+  color: var(--text-content);
+}
+
+.book-page-content .about-pullquote {
+  color: #666666;
+  border-left-color: var(--border-content);
+}
+
+.book-page-content .skills-category-title {
+  color: #999999;
+}
+
+.book-page-content .skills-item {
+  color: var(--text-content);
+}
+
+.book-page-content .project-item {
+  border-bottom-color: transparent;
+}
+
+.book-page-content .project-item:hover {
+  border-bottom-color: var(--border-content);
+}
+
+.book-page-content .project-number {
+  color: #999999;
+}
+
+.book-page-content .project-name {
+  color: var(--text-content);
+}
+
+.book-page-content .project-phrase {
+  color: #999999;
+}
+
+.book-page-content .experience-item {
+  border-bottom-color: var(--border-content);
+}
+
+.book-page-content .experience-item:first-child {
+  border-top-color: var(--border-content);
+}
+
+.book-page-content .experience-year {
+  color: #999999;
+}
+
+.book-page-content .experience-company {
+  color: var(--text-content);
+}
+
+.book-page-content .experience-role {
+  color: #666666;
+}
+
+.book-page-content .contact-email {
+  color: var(--text-content);
+}
+
+.book-page-content .contact-email:hover {
+  color: #666666;
+}
+
+.book-page-content .contact-social {
+  color: #666666;
+}
+
+.book-page-content .contact-social:hover {
+  color: var(--text-content);
 }
 
 /* ─── Page Indicator ────────────────────────────────────── */
@@ -175,7 +254,7 @@ html, body {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text-content);
   z-index: 10;
 }
 
@@ -201,6 +280,14 @@ html, body {
   position: relative;
 }
 
+.cover-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
 .cover-tagline {
   position: absolute;
   top: var(--spacing-unit);
@@ -209,7 +296,7 @@ html, body {
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--text-primary);
+  color: var(--text-cover);
   max-width: 280px;
   text-align: right;
 }
@@ -220,7 +307,7 @@ html, body {
   font-weight: 400;
   letter-spacing: -0.06em;
   line-height: 0.9;
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 .cover-bottom-bar {
@@ -240,7 +327,7 @@ html, body {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.05em;
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 .cover-bottom-right {
@@ -248,7 +335,7 @@ html, body {
   font-size: 32px;
   font-weight: 400;
   font-style: italic;
-  color: var(--text-primary);
+  color: var(--text-cover);
   letter-spacing: 0.02em;
 }
 
@@ -271,7 +358,7 @@ html, body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.8;
-  color: var(--text-primary);
+  color: var(--text-cover);
   margin-bottom: calc(var(--spacing-unit) * 0.4);
 }
 
@@ -284,7 +371,7 @@ html, body {
   color: var(--text-accent);
   margin-top: calc(var(--spacing-unit) * 0.8);
   padding-left: calc(var(--spacing-unit) * 0.5);
-  border-left: 1px solid var(--border);
+  border-left: 1px solid var(--border-cover);
 }
 
 /* ─── Skills Page ───────────────────────────────────────── */
@@ -323,7 +410,7 @@ html, body {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8;
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 /* ─── Projects Page ─────────────────────────────────────── */
@@ -354,7 +441,7 @@ html, body {
 }
 
 .project-item:hover {
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--border-cover);
 }
 
 .project-number {
@@ -370,7 +457,7 @@ html, body {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
-  color: var(--text-primary);
+  color: var(--text-cover);
   letter-spacing: 0.01em;
 }
 
@@ -423,11 +510,11 @@ html, body {
   display: flex;
   align-items: baseline;
   padding: calc(var(--spacing-unit) * 0.35) 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-cover);
 }
 
 .experience-item:first-child {
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border-cover);
 }
 
 .experience-year {
@@ -449,7 +536,7 @@ html, body {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 .experience-role {
@@ -473,7 +560,7 @@ html, body {
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1.1;
-  color: var(--text-primary);
+  color: var(--text-cover);
   text-decoration: none;
   transition: color 200ms ease;
 }
@@ -500,7 +587,7 @@ html, body {
 }
 
 .contact-social:hover {
-  color: var(--text-primary);
+  color: var(--text-cover);
 }
 
 /* ─── Colophon Page ─────────────────────────────────────── */

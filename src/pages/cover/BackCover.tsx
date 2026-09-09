@@ -1,4 +1,4 @@
-export default function Colophon() {
+export default function BackCover() {
   return (
     <div className="book-page colophon-page">
       <div className="colophon-content">

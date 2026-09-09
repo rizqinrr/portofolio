@@ -16,9 +16,9 @@ const experienceData = [
   },
 ];
 
-export default function Experience() {
+export default function ExperiencePage() {
   return (
-    <div className="book-page experience-page">
+    <div className="book-page book-page-content experience-page">
       <span className="chapter-label">chapter iv</span>
       <div className="experience-list">
         {experienceData.map((item) => (

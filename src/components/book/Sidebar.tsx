@@ -1,20 +1,24 @@
+import { motion, MotionValue } from 'framer-motion';
+
 interface SidebarProps {
   currentPage: number;
   onNavigate: (index: number) => void;
   isLight?: boolean;
-  scrollProgress?: number;
+  scrollProgress?: MotionValue<number>;
 }
 
-export default function Sidebar({ isLight, scrollProgress = 0 }: SidebarProps) {
+export default function Sidebar({ isLight, scrollProgress }: SidebarProps) {
   return (
     <aside className={`book-sidebar ${isLight ? 'light' : ''}`}>
       {/* Sticky line — flows with scroll */}
-      <div
-        className="sidebar-line"
-        style={{
-          transform: `scaleY(${scrollProgress})`,
-        }}
-      />
+      {scrollProgress && (
+        <motion.div
+          className="sidebar-line"
+          style={{
+            scaleY: scrollProgress,
+          }}
+        />
+      )}
 
       {/* Hamburger */}
       <button className="sidebar-hamburger" aria-label="Open navigation">

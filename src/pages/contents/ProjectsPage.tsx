@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
-import { projects } from '../../../data/projects';
+import { projects } from '../../data/projects';
 
-export default function Projects() {
+export default function ProjectsPage() {
   const [preview, setPreview] = useState<{ image: string; x: number; y: number } | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +23,7 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className="book-page projects-page">
+    <div className="book-page book-page-content projects-page">
       <span className="chapter-label">chapter iii</span>
       <div className="projects-list">
         {projects.map((project, i) => (
@@ -44,7 +44,6 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Floating image preview */}
       <div
         ref={previewRef}
         className={`project-preview ${preview ? 'visible' : ''}`}

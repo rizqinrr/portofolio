@@ -1,6 +1,6 @@
-export default function Contact() {
+export default function ContactPage() {
   return (
-    <div className="book-page contact-page">
+    <div className="book-page book-page-content contact-page">
       <span className="chapter-label">chapter v</span>
       <a href="mailto:hello@rizqinr.dev" className="contact-email">
         hello@rizqinr.dev

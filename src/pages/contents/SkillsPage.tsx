@@ -13,9 +13,9 @@ const skillsData = [
   },
 ];
 
-export default function Skills() {
+export default function SkillsPage() {
   return (
-    <div className="book-page skills-page">
+    <div className="book-page book-page-content skills-page">
       <span className="chapter-label">chapter ii</span>
       <div className="skills-grid">
         {skillsData.map((group) => (

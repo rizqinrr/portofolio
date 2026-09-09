@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface UseHorizontalScrollOptions {
   totalPages: number;
-  transitionDuration?: number;
 }
 
 export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) {
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
@@ -15,6 +14,18 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const pageWidth = typeof window !== 'undefined' ? window.innerWidth - 62 : 0;
+  const maxScroll = pageWidth * (totalPages - 1);
+
+  // Raw motion value for scroll position
+  const rawScrollX = useMotionValue(0);
+
+  // Spring physics for smooth scrolling
+  const smoothScrollX = useSpring(rawScrollX, {
+    damping: 40,
+    stiffness: 200,
+    mass: 0.8,
+    restDelta: 0.5,
+  });
 
   // Calculate current page from scroll position
   const updateCurrentPage = useCallback((pos: number) => {
@@ -22,7 +33,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     setCurrentPage(Math.max(0, Math.min(page, totalPages - 1)));
   }, [pageWidth, totalPages]);
 
-  // Wheel handler — free scroll, no snap
+  // Wheel handler — smooth scroll with spring
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -30,10 +41,10 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
 
-      const maxScroll = pageWidth * (totalPages - 1);
-      const newPos = Math.max(0, Math.min(scrollPosition + e.deltaY, maxScroll));
+      const current = rawScrollX.get();
+      const newPos = Math.max(0, Math.min(current + e.deltaY, maxScroll));
 
-      setScrollPosition(newPos);
+      rawScrollX.set(newPos);
       updateCurrentPage(newPos);
 
       // Debounce scroll end
@@ -46,9 +57,9 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
 
     container.addEventListener('wheel', handleWheel, { passive: false });
     return () => container.removeEventListener('wheel', handleWheel);
-  }, [scrollPosition, pageWidth, totalPages, updateCurrentPage]);
+  }, [rawScrollX, maxScroll, updateCurrentPage]);
 
-  // Touch handler — free scroll
+  // Touch handler — smooth scroll
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -58,7 +69,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     const handleTouchStart = (e: TouchEvent) => {
       touchStartX.current = e.touches[0].clientX;
       touchStartY.current = e.touches[0].clientY;
-      touchStartPos = scrollPosition;
+      touchStartPos = rawScrollX.get();
     };
 
     const handleTouchMove = (e: TouchEvent) => {
@@ -67,9 +78,8 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
 
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         e.preventDefault();
-        const maxScroll = pageWidth * (totalPages - 1);
         const newPos = Math.max(0, Math.min(touchStartPos + deltaX, maxScroll));
-        setScrollPosition(newPos);
+        rawScrollX.set(newPos);
         updateCurrentPage(newPos);
       }
     };
@@ -80,41 +90,45 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
       container.removeEventListener('touchstart', handleTouchStart);
       container.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [scrollPosition, pageWidth, totalPages, updateCurrentPage]);
+  }, [rawScrollX, maxScroll, updateCurrentPage]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const maxScroll = pageWidth * (totalPages - 1);
-      let newPos = scrollPosition;
+      const current = rawScrollX.get();
+      let newPos = current;
 
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
         e.preventDefault();
-        newPos = Math.min(scrollPosition + pageWidth, maxScroll);
+        newPos = Math.min(current + pageWidth, maxScroll);
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
-        newPos = Math.max(scrollPosition - pageWidth, 0);
+        newPos = Math.max(current - pageWidth, 0);
       }
 
-      if (newPos !== scrollPosition) {
-        setScrollPosition(newPos);
+      if (newPos !== current) {
+        rawScrollX.set(newPos);
         updateCurrentPage(newPos);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [scrollPosition, pageWidth, totalPages, updateCurrentPage]);
+  }, [rawScrollX, pageWidth, maxScroll, updateCurrentPage]);
 
   const goToPage = useCallback((index: number) => {
     if (index < 0 || index >= totalPages) return;
     const pos = index * pageWidth;
-    setScrollPosition(pos);
+    rawScrollX.set(pos);
     setCurrentPage(index);
-  }, [pageWidth, totalPages]);
+  }, [rawScrollX, pageWidth, totalPages]);
+
+  // Scroll progress for sidebar line
+  const scrollProgress = useTransform(smoothScrollX, [0, maxScroll], [0, 1]);
 
   return {
-    scrollPosition,
+    smoothScrollX,
+    scrollProgress,
     currentPage,
     goToPage,
     containerRef,

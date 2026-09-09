@@ -1,6 +1,6 @@
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="book-page about-page">
+    <div className="book-page book-page-content about-page">
       <span className="chapter-label">chapter i</span>
       <div className="about-content">
         <p className="about-paragraph">

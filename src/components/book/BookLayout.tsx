@@ -1,26 +1,24 @@
+import { motion } from 'framer-motion';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import Sidebar from './Sidebar';
 import PageIndicator from './PageIndicator';
-import Cover from './pages/Cover';
-import About from './pages/About';
-import Skills from './pages/Skills';
-import Projects from './pages/Projects';
-import Experience from './pages/Experience';
-import Contact from './pages/Contact';
-import Colophon from './pages/Colophon';
+import FrontCover from '../../pages/cover/FrontCover';
+import BackCover from '../../pages/cover/BackCover';
+import AboutPage from '../../pages/contents/AboutPage';
+import SkillsPage from '../../pages/contents/SkillsPage';
+import ProjectsPage from '../../pages/contents/ProjectsPage';
+import ExperiencePage from '../../pages/contents/ExperiencePage';
+import ContactPage from '../../pages/contents/ContactPage';
 
 const TOTAL_PAGES = 7;
 
 export default function BookLayout() {
-  const { scrollPosition, currentPage, goToPage, containerRef, pageWidth } = useHorizontalScroll({
+  const { smoothScrollX, scrollProgress, currentPage, goToPage, containerRef } = useHorizontalScroll({
     totalPages: TOTAL_PAGES,
   });
 
-  const maxScroll = pageWidth * (TOTAL_PAGES - 1);
-  const scrollProgress = maxScroll > 0 ? scrollPosition / maxScroll : 0;
-
-  // Determine if current page is light (non-cover pages)
-  const isLight = currentPage > 0;
+  // Determine if current page is light (content pages 1-5)
+  const isLight = currentPage >= 1 && currentPage <= 5;
 
   return (
     <div className="book-layout" ref={containerRef}>
@@ -31,20 +29,18 @@ export default function BookLayout() {
         scrollProgress={scrollProgress}
       />
 
-      <div
+      <motion.div
         className="book-pages"
-        style={{
-          transform: `translateX(-${scrollPosition}px)`,
-        }}
+        style={{ x: smoothScrollX }}
       >
-        <Cover />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-        <Colophon />
-      </div>
+        <FrontCover />
+        <AboutPage />
+        <SkillsPage />
+        <ProjectsPage />
+        <ExperiencePage />
+        <ContactPage />
+        <BackCover />
+      </motion.div>
 
       <PageIndicator current={currentPage} total={TOTAL_PAGES} />
     </div>
