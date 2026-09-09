@@ -21,17 +21,14 @@ export default function Cover() {
 
   return (
     <div className="book-page cover-page">
-      {/* Tagline — top right */}
       <p className="cover-tagline">
         software engineer crafting digital experiences with intention and care
       </p>
 
-      {/* Name — center left */}
       <h1 className="cover-name">
-        Muhammad<br />Rizqi
+        MUHAMMAD<br />RIZQI
       </h1>
 
-      {/* Bottom bar */}
       <div className="cover-bottom-bar">
         <span className="cover-bottom-left">
           jakarta, indonesia — {time}

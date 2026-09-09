@@ -4,12 +4,14 @@
 
 /* ─── Design Tokens ─────────────────────────────────────── */
 :root {
-  --bg: #2e2c28;
+  --bg-dark: #1a1a1a;
+  --bg-light: #ffffff;
   --text-primary: #f3ede3;
+  --text-dark: #1a1a1a;
   --text-accent: #888888;
   --text-muted: #888888;
-  --border: #1f1d1b;
-  --sidebar-width: 44px;
+  --border: #333333;
+  --sidebar-width: 62px;
   --spacing-unit: 50px;
   --font-heading: 'Playfair Display', 'PP Editorial Old', serif;
   --font-body: 'Inter', 'PP Neue Montreal', sans-serif;
@@ -28,7 +30,7 @@
 html, body {
   height: 100%;
   overflow: hidden;
-  background: var(--bg);
+  background: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-weight: 400;
@@ -57,7 +59,41 @@ html, body {
   justify-content: space-between;
   padding: 16px 0;
   z-index: 100;
-  background: var(--bg);
+  background: var(--bg-dark);
+  border-right: 1px solid var(--border);
+  transition: background var(--transition-duration) var(--transition-easing),
+              border-color var(--transition-duration) var(--transition-easing);
+}
+
+.book-sidebar.light {
+  background: var(--bg-light);
+  border-right-color: #e0e0e0;
+}
+
+.book-sidebar.light .sidebar-hamburger span {
+  background: var(--text-dark);
+}
+
+.book-sidebar.light .sidebar-top,
+.book-sidebar.light .sidebar-bottom {
+  color: #999999;
+}
+
+.book-sidebar.light .sidebar-center {
+  color: var(--text-dark);
+}
+
+/* Sticky line — flows top to bottom based on page */
+.sidebar-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--text-accent);
+  opacity: 0.3;
+  transform-origin: top;
+  transition: transform var(--transition-duration) var(--transition-easing);
 }
 
 .sidebar-hamburger {
@@ -75,6 +111,7 @@ html, body {
   width: 18px;
   height: 1.5px;
   background: var(--text-primary);
+  transition: background var(--transition-duration) var(--transition-easing);
 }
 
 .sidebar-vertical {
@@ -83,6 +120,7 @@ html, body {
   font-family: var(--font-body);
   white-space: nowrap;
   user-select: none;
+  transition: color var(--transition-duration) var(--transition-easing);
 }
 
 .sidebar-top {
@@ -109,7 +147,6 @@ html, body {
   display: flex;
   height: 100vh;
   margin-left: var(--sidebar-width);
-  transition: transform var(--transition-duration) var(--transition-easing);
   will-change: transform;
 }
 
@@ -121,7 +158,12 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background: var(--bg-dark);
+}
+
+.book-page.light {
+  background: var(--bg-light);
+  color: var(--text-dark);
 }
 
 /* ─── Page Indicator ────────────────────────────────────── */
@@ -174,7 +216,7 @@ html, body {
 
 .cover-name {
   font-family: var(--font-heading);
-  font-size: clamp(6rem, 20vw, 22rem);
+  font-size: clamp(3rem, 10vw, 11rem);
   font-weight: 400;
   letter-spacing: -0.06em;
   line-height: 0.9;
@@ -494,7 +536,7 @@ html, body {
 /* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root {
-    --sidebar-width: 44px;
+    --sidebar-width: 62px;
     --spacing-unit: 24px;
   }
 
@@ -508,7 +550,7 @@ html, body {
   }
 
   .cover-name {
-    font-size: clamp(3rem, 14vw, 8rem);
+    font-size: clamp(1.5rem, 7vw, 4rem);
     letter-spacing: -0.04em;
   }
 

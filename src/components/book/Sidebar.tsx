@@ -1,11 +1,21 @@
 interface SidebarProps {
   currentPage: number;
   onNavigate: (index: number) => void;
+  isLight?: boolean;
+  scrollProgress?: number;
 }
 
-export default function Sidebar(_props: SidebarProps) {
+export default function Sidebar({ isLight, scrollProgress = 0 }: SidebarProps) {
   return (
-    <aside className="book-sidebar">
+    <aside className={`book-sidebar ${isLight ? 'light' : ''}`}>
+      {/* Sticky line — flows with scroll */}
+      <div
+        className="sidebar-line"
+        style={{
+          transform: `scaleY(${scrollProgress})`,
+        }}
+      />
+
       {/* Hamburger */}
       <button className="sidebar-hamburger" aria-label="Open navigation">
         <span />

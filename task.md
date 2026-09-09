@@ -1,100 +1,48 @@
-# Roadmap Migrasi Portofolio: Static HTML ke React + Vite
+# Task Plan: Sidebar + Cover Refinement
 
-Dokumen ini mencatat seluruh rencana dan progres migrasi website portofolio Muhammad Rizqi Nurrahman (`rizqinrr/portofolio`) dari template HTML statis menjadi arsitektur modern berbasis **React + Vite + TypeScript**, dengan tetap mempertahankan **100% tampilan visual dan styling** aslinya.
+## 1. Cover Name — Kecilin 50% + Kapital
+- Font-size: dari `clamp(6rem, 20vw, 22rem)` → `clamp(3rem, 10vw, 11rem)`
+- Text: `MUHAMMAD RIZQI` (uppercase)
+- File: `src/index.css` (`.cover-name`), `src/components/book/pages/Cover.tsx`
 
----
+## 2. Sidebar — Lebar +40% + Garis Batas
+- Width: dari `44px` → `62px` (44 × 1.4 = 61.6 ≈ 62)
+- Border-right: `1px solid` (warna menyesuaikan tema halaman)
+- File: `src/index.css` (`--sidebar-width`, `.book-sidebar`)
 
-## 1. Ringkasan Tujuan & Keputusan
+## 3. Warna — Dark Gray (bukan hijau)
+- Cover bg: `#2e2c28` → `#1a1a1a` (abu gelap)
+- Text tetap `#f3ede3`
+- Sidebar bg menyesuaikan halaman aktif:
+  - Halaman dark (cover): sidebar bg = `#1a1a1a`
+  - Halaman light (dalam): sidebar bg = `#ffffff`
+  - Transisi smooth dengan `transition: background 450ms`
+- File: `src/index.css` (`:root`, `.book-sidebar`, `.cover-page`)
 
-- **Visual / Styling**: Pertahankan 100% style yang ada (`style-starter.css`, font Poppins, Font Awesome, tata letak, warna, gambar). Tidak mendesain ulang dari nol.
-- **Teknologi Baru**: 
-  - Build Tool: Vite
-  - UI Library: React 18 / 19 + TypeScript
-  - Routing: React Router DOM (Single Page Application, SPA)
-  - Data Layer: Array statis TypeScript (`src/data/projects.ts`) agar mudah menambah dan mengelola proyek
-- **Hosting**: GitHub Pages (otomatis via GitHub Actions)
-- **Base Path**: `/portofolio/` (sesuai URL repo GitHub Pages)
-- **Git Strategy**: Melanjutkan riwayat commit secara normal dan bertahap.
+## 4. Sidebar Adaptive Color
+- Sidebar bg berubah berdasarkan halaman aktif (dark ↔ light)
+- Text color juga ikut menyesuaikan
+- Implementasi: pass `currentPage` ke Sidebar, conditional class
+- File: `src/components/book/Sidebar.tsx`, `src/index.css`
 
----
+## 5. Sticky Line Kiri Sidebar
+- Garis tipis vertikal di sebelah kiri sidebar
+- Mengalir dari atas ke bawah sesuai halaman aktif
+- Implementasi: `::before` pseudo-element atau div terpisah, `transform: translateY()` berdasarkan `currentPage`
+- File: `src/index.css`, `src/components/book/Sidebar.tsx`
 
-## 2. Struktur Proyek Target
+## 6. Scroll — Bukan Snap, Tapi Follow Mouse
+- Hapus page-snapping (wheel threshold → pindah halaman)
+- Ganti: scroll bebas horizontal mengikuti deltaY mouse
+- `currentPage` dihitung dari `scrollLeft / pageWidth` (bukan state discrete)
+- Transisi halaman tetap smooth tapi tidak auto-snap
+- File: `src/hooks/useHorizontalScroll.ts` (rewrite besar)
 
-```
-portofolio/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # CI/CD otomatis deploy ke GitHub Pages
-├── public/
-│   └── assets/                 # Aset CSS, gambar, dan webfonts dipindah ke sini
-│       ├── css/style-starter.css
-│       ├── images/
-│       ├── jpg/
-│       └── webfonts/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx          # Navigasi, mobile toggle, sticky header, dark/light toggle
-│   │   ├── Footer.tsx          # Footer konsisten di setiap halaman
-│   │   └── ProjectCard.tsx     # Komponen kartu proyek portofolio
-│   ├── pages/
-│   │   ├── Home.tsx            # Halaman utama (Banner, Intro, Skills, Projects Gallery)
-│   │   ├── About.tsx           # Halaman My Intro & Timeline
-│   │   ├── Services.tsx        # Halaman Services
-│   │   └── Contact.tsx         # Halaman Contact Me
-│   ├── data/
-│   │   └── projects.ts         # Sumber data utama daftar proyek
-│   ├── types/
-│   │   └── index.ts            # Definisi tipe TypeScript
-│   ├── App.tsx                 # Router & Layout Wrapper
-│   ├── main.tsx                # Entry point React
-│   └── index.css               # Import global & fallback styles
-├── index.html                  # Shell utama Vite
-├── vite.config.ts              # Konfigurasi Vite & base path
-├── tsconfig.json               # Konfigurasi TypeScript
-├── package.json
-└── task.md                     # File tracking ini
-```
-
----
-
-## 3. Checklist & Status Pengerjaan
-
-### Fase 1: Inisialisasi Proyek & Penataan Aset
-- [x] Buat file `package.json` dengan dependensi React, React-DOM, React Router DOM, Vite, dan TypeScript.
-- [x] Buat `tsconfig.json` dan `tsconfig.node.json`.
-- [x] Buat `vite.config.ts` dengan pengaturan `base: '/portofolio/'`.
-- [x] Pindahkan folder `assets/` ke `public/assets/` agar path internal CSS & font tetap terjaga.
-- [x] Siapkan `index.html` root Vite yang me-load Google Font Poppins dan `/portofolio/assets/css/style-starter.css`.
-- [x] Jalankan `npm install` dan pastikan dependensi terpasang.
-- [x] Verifikasi tes build Vite + TypeScript (`npm run build`) berjalan sukses.
-
-### Fase 2: Ekstraksi Komponen Global & Logic Native
-- [x] Buat tipe data proyek di `src/types/index.ts`.
-- [x] Buat `src/data/projects.ts` dengan template data terstruktur untuk portofolio.
-- [x] Implementasikan `Navbar.tsx`:
-  - [x] Porting struktur HTML navbar.
-  - [x] Konversi logic scroll sticky header dari jQuery ke React (`useEffect`).
-  - [x] Konversi mobile menu toggle ke state React (`useState`).
-  - [x] Konversi Dark/Light theme toggle ke state React (sinkron dengan `data-theme` di `<html>`).
-  - [x] Ganti navigasi `<a>` dengan `<NavLink>` / `<Link>` dari React Router.
-- [x] Implementasikan `Footer.tsx` (reusable untuk semua halaman).
-- [x] Setup Router & Placeholder Routes di `src/App.tsx` serta verifikasi build TypeScript.
-
-### Fase 3: Migrasi Halaman Menjadi Komponen React (JSX)
-- [x] Siapkan data sertifikat asli (`src/data/certificates.ts`) dan proyek (`src/data/projects.ts`).
-- [x] Buat komponen `TypingText.tsx` untuk animasi teks mengetik di Hero.
-- [x] Buat komponen `GalleryModal.tsx` sebagai pengganti lightbox pop-up jQuery.
-- [x] Buat `src/pages/Home.tsx` (Hero, Partner logos, About overview, dan Projects/Certificates gallery).
-- [x] Buat `src/pages/About.tsx` (Profil, Timeline pendidikan & pengalaman, Expertise progress bar).
-- [x] Buat `src/pages/Services.tsx` (Kartu penawaran layanan web development & galeri portofolio lengkap).
-- [x] Buat `src/pages/Contact.tsx` (Kontak detail & form kirim pesan interaktif).
-- [x] Hubungkan semua rute di `src/App.tsx`.
-- [x] Bersihkan file HTML monolitik lama (`about.html`, `services.html`, `contact.html`).
-- [x] Uji build (`npm run build`) sukses tanpa error TypeScript.
-
-### Fase 4: Routing, Build & Otomasi GitHub Pages
-- [x] Konfigurasi `src/App.tsx` dengan `BrowserRouter` basename `/portofolio` dan fallback redirect SPA (`public/404.html` + `index.html`).
-- [x] Uji build lokal (`npm run build`) dan pastikan tidak ada error TypeScript atau bundling.
-- [x] Buat workflow GitHub Actions `.github/workflows/deploy.yml`.
-- [x] Buat dokumentasi panduan di `README.md` (cara menjalankan lokal dan cara menambah proyek di `projects.ts`).
-- [x] Commit dan push hasil migrasi ke GitHub.
+## Urutan Eksekusi
+1. Update CSS tokens (sidebar width, dark gray bg)
+2. Update Cover.tsx (uppercase name)
+3. Update index.css (cover-name size, sidebar border, adaptive colors)
+4. Update Sidebar.tsx (adaptive bg, sticky line)
+5. Rewrite useHorizontalScroll.ts (free scroll, no snap)
+6. Update BookLayout.tsx (pass scroll position instead of discrete page)
+7. Build + verify

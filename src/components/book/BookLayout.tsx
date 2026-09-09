@@ -12,20 +12,29 @@ import Colophon from './pages/Colophon';
 const TOTAL_PAGES = 7;
 
 export default function BookLayout() {
-  const { currentPage, goToPage, containerRef } = useHorizontalScroll({
+  const { scrollPosition, currentPage, goToPage, containerRef, pageWidth } = useHorizontalScroll({
     totalPages: TOTAL_PAGES,
   });
 
-  const pageWidth = `calc(100vw - var(--sidebar-width))`;
+  const maxScroll = pageWidth * (TOTAL_PAGES - 1);
+  const scrollProgress = maxScroll > 0 ? scrollPosition / maxScroll : 0;
+
+  // Determine if current page is light (non-cover pages)
+  const isLight = currentPage > 0;
 
   return (
     <div className="book-layout" ref={containerRef}>
-      <Sidebar currentPage={currentPage} onNavigate={goToPage} />
+      <Sidebar
+        currentPage={currentPage}
+        onNavigate={goToPage}
+        isLight={isLight}
+        scrollProgress={scrollProgress}
+      />
 
       <div
         className="book-pages"
         style={{
-          transform: `translateX(calc(-${currentPage} * ${pageWidth}))`,
+          transform: `translateX(-${scrollPosition}px)`,
         }}
       >
         <Cover />
