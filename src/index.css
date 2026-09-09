@@ -2,4 +2,498 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global overrides if needed */
+/* ─── Design Tokens ─────────────────────────────────────── */
+:root {
+  --bg: #ffffff;
+  --text-primary: #000000;
+  --text-accent: #888888;
+  --text-muted: #b8b3ac;
+  --border: #1f1d1b;
+  --sidebar-width: 200px;
+  --spacing-unit: 50px;
+  --font-heading: 'Playfair Display', 'PP Editorial Old', serif;
+  --font-body: 'Inter', 'PP Neue Montreal', sans-serif;
+  --transition-duration: 450ms;
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0 !important;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Book Layout ───────────────────────────────────────── */
+.book-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────── */
+.book-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--spacing-unit) 0 var(--spacing-unit) var(--spacing-unit);
+  z-index: 100;
+  background: var(--bg);
+}
+
+.book-sidebar-title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.book-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: calc(var(--spacing-unit) * 1.5);
+}
+
+.book-sidebar-link {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 4px 0 4px 12px;
+  border-left: 1px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.book-sidebar-link:hover {
+  color: var(--text-accent);
+}
+
+.book-sidebar-link.active {
+  color: var(--text-primary);
+  border-left-color: var(--text-accent);
+}
+
+.book-sidebar-footer {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-transform: lowercase;
+}
+
+/* ─── Pages Container ───────────────────────────────────── */
+.book-pages {
+  display: flex;
+  height: 100vh;
+  margin-left: var(--sidebar-width);
+  transition: transform var(--transition-duration) var(--transition-easing);
+  will-change: transform;
+}
+
+.book-page {
+  flex: 0 0 calc(100vw - var(--sidebar-width));
+  width: calc(100vw - var(--sidebar-width));
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* ─── Page Indicator ────────────────────────────────────── */
+.book-page-indicator {
+  position: absolute;
+  bottom: var(--spacing-unit);
+  right: var(--spacing-unit);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  z-index: 10;
+}
+
+/* ─── Chapter Label ─────────────────────────────────────── */
+.chapter-label {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--text-accent);
+  position: absolute;
+  top: var(--spacing-unit);
+  left: var(--spacing-unit);
+}
+
+/* ─── Cover Page ────────────────────────────────────────── */
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.cover-name {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 12vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  color: var(--text-primary);
+}
+
+.cover-role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--text-accent);
+  margin-top: calc(var(--spacing-unit) * 0.6);
+}
+
+/* ─── About Page ────────────────────────────────────────── */
+.about-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.about-content {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-paragraph {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin-bottom: calc(var(--spacing-unit) * 0.4);
+}
+
+.about-pullquote {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-accent);
+  margin-top: calc(var(--spacing-unit) * 0.8);
+  padding-left: calc(var(--spacing-unit) * 0.5);
+  border-left: 1px solid var(--border);
+}
+
+/* ─── Skills Page ───────────────────────────────────────── */
+.skills-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--spacing-unit) * 1);
+  max-width: 700px;
+}
+
+.skills-category {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.15);
+}
+
+.skills-category-title {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: var(--text-accent);
+  margin-bottom: calc(var(--spacing-unit) * 0.2);
+}
+
+.skills-item {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+/* ─── Projects Page ─────────────────────────────────────── */
+.projects-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.1);
+  max-width: 600px;
+}
+
+.project-item {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--spacing-unit) * 0.3);
+  padding: calc(var(--spacing-unit) * 0.15) 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-item:hover {
+  border-bottom-color: var(--border);
+}
+
+.project-number {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  min-width: 24px;
+  letter-spacing: 0.05em;
+}
+
+.project-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+
+.project-phrase {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: auto;
+  letter-spacing: 0.01em;
+}
+
+/* Floating image preview */
+.project-preview {
+  position: fixed;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 200ms ease;
+  width: 280px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.project-preview.visible {
+  opacity: 1;
+}
+
+.project-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Experience Page ───────────────────────────────────── */
+.experience-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.experience-item {
+  display: flex;
+  align-items: baseline;
+  padding: calc(var(--spacing-unit) * 0.35) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.experience-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.experience-year {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+  min-width: 80px;
+  letter-spacing: 0.05em;
+}
+
+.experience-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.experience-company {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.experience-role {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-accent);
+}
+
+/* ─── Contact Page ──────────────────────────────────────── */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.contact-email {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact-email:hover {
+  color: var(--text-accent);
+}
+
+.contact-socials {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 0.5);
+  margin-top: calc(var(--spacing-unit) * 0.8);
+}
+
+.contact-social {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact-social:hover {
+  color: var(--text-primary);
+}
+
+/* ─── Colophon Page ─────────────────────────────────────── */
+.colophon-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.colophon-content {
+  max-width: 400px;
+}
+
+.colophon-line {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 2;
+  color: var(--text-accent);
+  letter-spacing: 0.02em;
+}
+
+.colophon-closing {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: calc(var(--spacing-unit) * 0.6);
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 60px;
+    --spacing-unit: 24px;
+  }
+
+  .book-sidebar {
+    padding: var(--spacing-unit) 0 var(--spacing-unit) 12px;
+  }
+
+  .book-sidebar-title {
+    font-size: 11px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .book-sidebar-nav {
+    display: none;
+  }
+
+  .book-sidebar-footer {
+    display: none;
+  }
+
+  .cover-name {
+    font-size: clamp(3rem, 10vw, 6rem);
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--spacing-unit) * 0.5);
+  }
+}

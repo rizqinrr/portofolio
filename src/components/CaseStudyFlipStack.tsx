@@ -9,7 +9,6 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { useRef } from "react";
-import { BrowserFrame } from "./BrowserFrame";
 import { ScrollProgress } from "./ScrollProgress";
 
 export interface CaseStudyFlipItem {
@@ -108,7 +107,7 @@ function FullPageFlipCard({
       }}
     >
       <motion.div
-        className="flex h-full w-full flex-col overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.28)] lg:grid lg:grid-cols-[1fr_1.35fr]"
+        className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.28)]"
         style={{
           backgroundColor: item.background,
           color: item.foreground ?? "#ffffff",
@@ -117,10 +116,10 @@ function FullPageFlipCard({
           transformOrigin: "50% 100%",
         }}
       >
-        {/* Kolom Kiri: Informasi Proyek (Flush-Left & Rapi) */}
-        <div className="flex flex-1 flex-col justify-between p-6 sm:p-8 md:p-12">
+        {/* Konten Teks di Sisi Kiri (Full Height) */}
+        <div className="flex flex-1 flex-col justify-between p-6 sm:p-8 md:p-12 pr-6 sm:pr-[75%] md:pr-[60%] lg:pr-[55%]">
           {/* Header Kartu: Nomor & Tombol Action */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
             <span className="font-mono text-3xl font-bold tracking-tight opacity-90 sm:text-4xl">
               {item.number ?? String(index + 1).padStart(2, "0")}
             </span>
@@ -148,7 +147,7 @@ function FullPageFlipCard({
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl lg:leading-[1.1]">
               {item.title}
             </h2>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed opacity-85 sm:text-base md:text-lg">
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed opacity-85 sm:text-base md:text-lg">
               {item.description}
             </p>
 
@@ -173,19 +172,15 @@ function FullPageFlipCard({
           </div>
         </div>
 
-        {/* Kolom Kanan: Tampilan Browser Mockup */}
-        <div className="relative flex flex-1 items-center justify-center p-4 sm:p-6 lg:p-8">
-          <div className="h-full max-h-[78vh] w-full">
-            <BrowserFrame url={item.githubUrl ?? item.demoUrl}>
-              <img
-                src={item.image}
-                alt={item.imageAlt}
-                className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
-                loading={index < 2 ? "eager" : "lazy"}
-                draggable={false}
-              />
-            </BrowserFrame>
-          </div>
+        {/* Foto Proyek di Pojok Kanan Atas Card (~50% width, 4x luas, rasio 16:9) tanpa browser chrome */}
+        <div className="pointer-events-auto absolute right-4 top-4 z-20 w-[85%] sm:right-6 sm:top-6 sm:w-[70%] md:w-[56%] lg:w-[50%] aspect-video overflow-hidden rounded-xl border border-white/15 shadow-2xl backdrop-blur-sm">
+          <img
+            src={item.image}
+            alt={item.imageAlt}
+            className="h-full w-full object-cover object-top transition-transform duration-500 hover:scale-105"
+            loading={index < 2 ? "eager" : "lazy"}
+            draggable={false}
+          />
         </div>
       </motion.div>
     </motion.article>
