@@ -4,12 +4,12 @@
 
 /* ─── Design Tokens ─────────────────────────────────────── */
 :root {
-  --bg: #ffffff;
-  --text-primary: #000000;
+  --bg: #2e2c28;
+  --text-primary: #f3ede3;
   --text-accent: #888888;
-  --text-muted: #b8b3ac;
+  --text-muted: #888888;
   --border: #1f1d1b;
-  --sidebar-width: 200px;
+  --sidebar-width: 44px;
   --spacing-unit: 50px;
   --font-heading: 'Playfair Display', 'PP Editorial Old', serif;
   --font-body: 'Inter', 'PP Neue Montreal', sans-serif;
@@ -44,7 +44,7 @@ html, body {
   overflow: hidden;
 }
 
-/* ─── Sidebar ───────────────────────────────────────────── */
+/* ─── Sidebar (Spine) ───────────────────────────────────── */
 .book-sidebar {
   position: fixed;
   left: 0;
@@ -53,60 +53,55 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-unit) 0 var(--spacing-unit) var(--spacing-unit);
+  padding: 16px 0;
   z-index: 100;
   background: var(--bg);
 }
 
-.book-sidebar-title {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: var(--text-primary);
-  line-height: 1.4;
-}
-
-.book-sidebar-nav {
+.sidebar-hamburger {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  margin-top: calc(var(--spacing-unit) * 1.5);
-}
-
-.book-sidebar-link {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: lowercase;
-  color: var(--text-muted);
-  text-decoration: none;
-  padding: 4px 0 4px 12px;
-  border-left: 1px solid transparent;
-  transition: color 200ms ease, border-color 200ms ease;
+  gap: 4px;
+  background: none;
+  border: none;
   cursor: pointer;
-  line-height: 1.6;
+  padding: 4px;
 }
 
-.book-sidebar-link:hover {
-  color: var(--text-accent);
+.sidebar-hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-primary);
 }
 
-.book-sidebar-link.active {
-  color: var(--text-primary);
-  border-left-color: var(--text-accent);
-}
-
-.book-sidebar-footer {
+.sidebar-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
   font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.05em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sidebar-top {
+  font-size: 10px;
+  letter-spacing: 0.25em;
   color: var(--text-muted);
-  text-transform: lowercase;
+  text-transform: uppercase;
+}
+
+.sidebar-center {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--text-primary);
+}
+
+.sidebar-bottom {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
 }
 
 /* ─── Pages Container ───────────────────────────────────── */
@@ -161,25 +156,58 @@ html, body {
   flex-direction: column;
   justify-content: center;
   padding: 0 var(--spacing-unit);
+  position: relative;
+}
+
+.cover-tagline {
+  position: absolute;
+  top: var(--spacing-unit);
+  right: var(--spacing-unit);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-primary);
+  max-width: 280px;
+  text-align: right;
 }
 
 .cover-name {
   font-family: var(--font-heading);
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(6rem, 20vw, 22rem);
   font-weight: 400;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
   color: var(--text-primary);
 }
 
-.cover-role {
+.cover-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--spacing-unit);
+}
+
+.cover-bottom-left,
+.cover-bottom-center {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: lowercase;
-  color: var(--text-accent);
-  margin-top: calc(var(--spacing-unit) * 0.6);
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.cover-bottom-right {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
 }
 
 /* ─── About Page ────────────────────────────────────────── */
@@ -466,30 +494,31 @@ html, body {
 /* ─── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
   :root {
-    --sidebar-width: 60px;
+    --sidebar-width: 44px;
     --spacing-unit: 24px;
   }
 
-  .book-sidebar {
-    padding: var(--spacing-unit) 0 var(--spacing-unit) 12px;
+  .sidebar-center {
+    font-size: 9px;
   }
 
-  .book-sidebar-title {
-    font-size: 11px;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-  }
-
-  .book-sidebar-nav {
-    display: none;
-  }
-
-  .book-sidebar-footer {
-    display: none;
+  .sidebar-top,
+  .sidebar-bottom {
+    font-size: 8px;
   }
 
   .cover-name {
-    font-size: clamp(3rem, 10vw, 6rem);
+    font-size: clamp(3rem, 14vw, 8rem);
+    letter-spacing: -0.04em;
+  }
+
+  .cover-tagline {
+    font-size: 14px;
+    max-width: 200px;
+  }
+
+  .cover-bottom-right {
+    font-size: 20px;
   }
 
   .skills-grid {
