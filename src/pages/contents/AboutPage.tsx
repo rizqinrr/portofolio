@@ -37,18 +37,6 @@ const photoVariants = {
   },
 };
 
-const chapterVariants = {
-  hidden: { scale: 1.3, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 interface AboutPageProps {
   isActive?: boolean;
 }
@@ -58,9 +46,9 @@ export default function AboutPage({ isActive = false }: AboutPageProps) {
     <div className="book-page book-page-content about-page">
       <motion.div
         className="chapter-header"
-        initial="hidden"
-        animate={isActive ? "visible" : "hidden"}
-        variants={chapterVariants}
+        initial={{ scale: 1.3, opacity: 0 }}
+        animate={isActive ? { scale: 1, opacity: 1 } : { scale: 1.3, opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="chapter-label">Chapter I</span>
         <span className="chapter-subtitle">Quick intro</span>

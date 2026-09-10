@@ -42,7 +42,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
   // Calculate current page from scroll position
   const updateCurrentPage = useCallback((pos: number) => {
     if (pageWidth <= 0) return;
-    const page = Math.round(pos / pageWidth);
+    const page = Math.floor(pos / pageWidth + 0.8);
     setCurrentPage(Math.max(0, Math.min(page, totalPages - 1)));
   }, [pageWidth, totalPages]);
 

@@ -8,6 +8,7 @@ interface ProjectsPageProps {
 
 export default function ProjectsPage({ isActive = false }: ProjectsPageProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const activeProject = projects.find((p) => p.id === activeId);
 
   return (
     <div className="book-page book-page-content projects-page">
@@ -21,63 +22,68 @@ export default function ProjectsPage({ isActive = false }: ProjectsPageProps) {
         <span className="chapter-subtitle">Selected works</span>
       </motion.div>
 
-      <div className="projects-toc">
-        {projects.map((project, i) => {
-          const isExpanded = project.id === activeId;
-          return (
-            <div key={project.id} className="toc-entry-wrapper">
-              <div
-                className={`toc-entry ${isExpanded ? 'active' : ''}`}
-                onClick={() => setActiveId(isExpanded ? null : project.id)}
-                onMouseEnter={() => setActiveId(project.id)}
-              >
-                <span className="toc-number">{String(i + 1).padStart(2, '0')}</span>
-                <span className="toc-title">{project.title}</span>
-                <span className="toc-leader" />
-                <span className="toc-year">{project.year}</span>
+      <div className="projects-split">
+        {/* LEFT — Table of Contents list */}
+        <div className="projects-toc-list">
+          {projects.map((project, i) => {
+            const isActiveItem = project.id === activeId;
+            return (
+              <div key={project.id} className="toc-entry-wrapper">
+                <div
+                  className={`toc-entry ${isActiveItem ? 'active' : ''}`}
+                  onMouseEnter={() => setActiveId(project.id)}
+                  onClick={() => setActiveId(project.id)}
+                >
+                  <span className="toc-number">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="toc-title">{project.title}</span>
+                  <span className="toc-leader" />
+                  <span className="toc-year">{project.year}</span>
+                </div>
               </div>
+            );
+          })}
+        </div>
 
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="toc-detail"
-                  >
-                    <p className="toc-desc">{project.description}</p>
-                    <div className="toc-stack">
-                      {project.stack.map((item) => (
-                        <span key={item} className="toc-stack-item">{item}</span>
-                      ))}
-                    </div>
-                    <ul className="toc-highlights">
-                      {project.highlights.map((point, idx) => (
-                        <li key={idx} className="toc-highlight-item">
-                          <span className="toc-bullet">—</span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="toc-links">
-                      {project.githubUrl && (
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="toc-link">
-                          github ↗
-                        </a>
-                      )}
-                      {project.demoUrl && (
-                        <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="toc-link">
-                          live demo ↗
-                        </a>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+        {/* RIGHT — Preview frame + book lines */}
+        <div className="projects-preview">
+          {/* Empty frame with book lines (visible when nothing hovered) */}
+          <div className={`projects-preview-empty ${activeProject ? 'hidden' : ''}`}>
+            <div className="projects-book-lines" />
+          </div>
+
+          {/* Active project preview */}
+          <AnimatePresence mode="wait">
+            {activeProject && (
+              <motion.div
+                key={activeProject.id}
+                className="projects-preview-content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {/* Image — grows from center */}
+                <div className="projects-preview-frame">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={activeProject.id}
+                      src={activeProject.image}
+                      alt={activeProject.title}
+                      className="projects-preview-image"
+                      initial={{ scale: 0.1, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.1, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </AnimatePresence>
+                </div>
+
+                {/* Book lines under frame */}
+                <div className="projects-book-lines" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

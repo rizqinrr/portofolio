@@ -458,55 +458,84 @@ html, body {
   color: #8a8178;
 }
 
-/* Skills Page */
-.skills-columns {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: calc(var(--spacing-unit) * 1);
-  max-width: 700px;
-  margin: auto;
+/* Skills Page — Vertical Logo Marquee */
+.skills-page {
+  background: #ebebeb;
 }
 
-.skills-column {
+.skills-marquee {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 48px;
+  overflow: hidden;
+  padding: 0 calc(var(--spacing-unit) * 0.25);
+}
+
+.skills-marquee-col {
+  overflow: hidden;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.skills-column-title {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: lowercase;
-  color: #888888;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #e5e2da;
-  padding-bottom: 6px;
+.skills-marquee-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  height: max-content;
+  will-change: transform;
 }
 
-.skills-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.skills-logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: grayscale(100%) opacity(0.4);
+  transition: filter 0.4s ease, transform 0.3s ease;
 }
 
-.skills-list-item {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.8;
-  color: var(--text-content);
+.skills-marquee-col:hover .skills-logo-item {
+  filter: grayscale(0%) opacity(1);
 }
 
-/* Table of Contents — shared by Projects & Experience */
-.projects-toc,
+.skills-logo-item:hover {
+  transform: scale(1.3);
+}
+
+/* Table of Contents — shared TOC entries (used by Projects & Experience) */
 .experience-toc {
   max-width: 820px;
   width: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
+}
+
+/* Projects Split Layout — TOC left + preview frame right */
+.projects-split {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: calc(var(--spacing-unit) * 1.2);
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  align-items: start;
+}
+
+.projects-toc-list {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 120px;
+  align-self: start;
 }
 
 .toc-entry-wrapper {
@@ -664,6 +693,62 @@ html, body {
   opacity: 0.6;
 }
 
+/* Projects — Preview Frame (right side) */
+.projects-preview {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-preview-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease;
+}
+
+.projects-preview-empty.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.projects-preview-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-preview-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid #1f1d1b;
+  background: #faf9f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projects-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Book lines — repeating thin lines like notebook paper */
+.projects-book-lines {
+  height: 56px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    #e5e2da 27px,
+    #e5e2da 28px
+  );
+}
+
 /* Contact Page */
 .contact-email {
   font-family: var(--font-heading);
@@ -762,9 +847,18 @@ html, body {
     font-size: 20px;
   }
 
-  .skills-columns {
-    grid-template-columns: repeat(2, 1fr);
-    gap: calc(var(--spacing-unit) * 0.5);
+  .skills-marquee {
+    left: 0;
+    gap: 24px;
+  }
+
+  .skills-marquee-track {
+    gap: 24px;
+  }
+
+  .skills-logo-item svg {
+    width: 64px;
+    height: 64px;
   }
 
   .toc-leader {
@@ -778,5 +872,18 @@ html, body {
 
   .toc-title {
     font-size: 16px;
+  }
+
+  .projects-split {
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-unit) * 0.5);
+  }
+
+  .projects-preview {
+    min-height: 300px;
+  }
+
+  .projects-preview-frame {
+    aspect-ratio: 16 / 9;
   }
 }
