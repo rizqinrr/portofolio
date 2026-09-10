@@ -9,12 +9,13 @@ import AboutPage from '../../pages/contents/AboutPage';
 import SkillsPage from '../../pages/contents/SkillsPage';
 import ProjectsPage from '../../pages/contents/ProjectsPage';
 import ExperiencePage from '../../pages/contents/ExperiencePage';
+import GalleryPage from '../../pages/contents/GalleryPage';
 import ContactPage from '../../pages/contents/ContactPage';
 
-const TOTAL_PAGES = 7;
+const TOTAL_PAGES = 8;
 
 export default function BookLayout() {
-  const { contentX, smoothScrollX, scrollProgress, currentPage, goToPage, containerRef, pageWidth } = useHorizontalScroll({
+  const { contentX, smoothScrollX, scrollProgress, currentPage, activePages, goToPage, containerRef, pageWidth } = useHorizontalScroll({
     totalPages: TOTAL_PAGES,
   });
 
@@ -47,11 +48,12 @@ export default function BookLayout() {
         style={{ x: contentX }}
       >
         <FrontCover />
-        <AboutPage isActive={currentPage === 1} />
-        <ProjectsPage isActive={currentPage === 2} />
-        <ExperiencePage isActive={currentPage === 3} />
-        <SkillsPage isActive={currentPage === 4} />
-        <ContactPage isActive={currentPage === 5} />
+        <AboutPage isActive={activePages[1]} />
+        <ProjectsPage isActive={activePages[2]} />
+        <ExperiencePage isActive={activePages[3]} />
+        <GalleryPage isActive={activePages[4]} />
+        <SkillsPage isActive={activePages[5]} />
+        <ContactPage isActive={activePages[6]} />
         <BackCover isActive={currentPage === TOTAL_PAGES - 1} />
       </motion.div>
 

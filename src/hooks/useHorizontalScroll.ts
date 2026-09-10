@@ -7,6 +7,9 @@ interface UseHorizontalScrollOptions {
 
 export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) {
   const [currentPage, setCurrentPage] = useState(0);
+  const [activePages, setActivePages] = useState<boolean[]>(
+    () => Array(totalPages).fill(false).map((_, i) => i === 0)
+  );
   const [pageWidth, setPageWidth] = useState(() =>
     typeof window !== 'undefined' ? window.innerWidth - 62 : 0
   );
@@ -42,7 +45,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
   // Calculate current page from scroll position
   const updateCurrentPage = useCallback((pos: number) => {
     if (pageWidth <= 0) return;
-    const page = Math.floor(pos / pageWidth + 0.8);
+    const page = Math.floor(pos / pageWidth + 0.03);
     setCurrentPage(Math.max(0, Math.min(page, totalPages - 1)));
   }, [pageWidth, totalPages]);
 
@@ -50,9 +53,17 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
   useEffect(() => {
     const unsubscribe = rawScrollX.on('change', (latest) => {
       updateCurrentPage(latest);
+      // Compute per-page active state with 97% overlap window
+      if (pageWidth <= 0) return;
+      const OVERLAP = 0.97;
+      setActivePages(
+        Array.from({ length: totalPages }, (_, i) =>
+          Math.abs(latest / pageWidth - i) < OVERLAP
+        )
+      );
     });
     return unsubscribe;
-  }, [rawScrollX, updateCurrentPage]);
+  }, [rawScrollX, updateCurrentPage, pageWidth, totalPages]);
 
   // Wheel handler — smooth scroll with spring
   useEffect(() => {
@@ -60,6 +71,18 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Nested vertical scroller (e.g. gallery page) — let it scroll until it
+      // reaches an edge, then hand off to horizontal page navigation.
+      const inner = (e.target as Element)?.closest?.('[data-inner-scroll]') as HTMLElement | null;
+      if (inner) {
+        const atTop = inner.scrollTop <= 0;
+        const atBottom = inner.scrollTop + inner.clientHeight >= inner.scrollHeight - 1;
+        const down = e.deltaY > 0;
+        if ((down && !atBottom) || (!down && !atTop)) {
+          return;
+        }
+      }
+
       e.preventDefault();
 
       const current = rawScrollX.get();
@@ -87,6 +110,12 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     const handleTouchMove = (e: TouchEvent) => {
       const deltaX = touchStartX.current - e.touches[0].clientX;
       const deltaY = touchStartY.current - e.touches[0].clientY;
+
+      // Nested vertical scroller — let native vertical scroll win inside it.
+      const inner = (e.target as Element)?.closest?.('[data-inner-scroll]') as HTMLElement | null;
+      if (inner && Math.abs(deltaY) >= Math.abs(deltaX)) {
+        return;
+      }
 
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
         e.preventDefault();
@@ -140,6 +169,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     smoothScrollX,
     scrollProgress,
     currentPage,
+    activePages,
     goToPage,
     containerRef,
     pageWidth,

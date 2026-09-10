@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { experiences } from '../../data/projects';
 
 interface ExperiencePageProps {
@@ -7,8 +6,6 @@ interface ExperiencePageProps {
 }
 
 export default function ExperiencePage({ isActive = false }: ExperiencePageProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
-
   return (
     <div className="book-page book-page-content experience-page">
       <motion.div
@@ -18,58 +15,56 @@ export default function ExperiencePage({ isActive = false }: ExperiencePageProps
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="chapter-label">Chapter III</span>
-        <span className="chapter-subtitle">Work & Journey</span>
+        <span className="chapter-subtitle">Work &amp; Journey</span>
       </motion.div>
 
-      <div className="experience-toc">
-        {experiences.map((exp) => {
-          const isExpanded = exp.id === activeId;
-          return (
-            <div key={exp.id} className="toc-entry-wrapper">
-              <div
-                className={`toc-entry ${isExpanded ? 'active' : ''}`}
-                onClick={() => setActiveId(isExpanded ? null : exp.id)}
-                onMouseEnter={() => setActiveId(exp.id)}
-              >
-                <span className="toc-title">{exp.role}</span>
-                <span className="toc-leader" />
-                <span className="toc-year">{exp.period}</span>
-              </div>
+      <div className="experience-scroll" data-inner-scroll>
+        <div className="experience-list">
+          {experiences.map((exp, i) => (
+            <div key={exp.id}>
+              <article className="exp-entry">
+                <span className="exp-marker" aria-hidden="true" />
+                <span className="exp-year">{exp.period}</span>
 
-              <AnimatePresence>
-                {isExpanded && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="toc-detail"
-                  >
-                    <p className="toc-company">{exp.company} — {exp.type}</p>
-                    <p className="toc-desc">{exp.context}</p>
-                    {exp.highlights && (
-                      <ul className="toc-highlights">
-                        {exp.highlights.map((h, i) => (
-                          <li key={i} className="toc-highlight-item">
-                            <span className="toc-bullet">—</span>
-                            <span>{h}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {exp.stack && exp.stack.length > 0 && (
-                      <div className="toc-stack">
-                        {exp.stack.map((s) => (
-                          <span key={s} className="toc-stack-item">{s}</span>
-                        ))}
-                      </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                <div className="exp-body">
+                  <h3 className="exp-role">{exp.role}</h3>
+                  <p className="exp-meta">
+                    {exp.company} — {exp.type}
+                  </p>
+                  <p className="exp-context">{exp.context}</p>
+
+                  {exp.highlights && exp.highlights.length > 0 && (
+                    <ul className="exp-highlights">
+                      {exp.highlights.map((h, idx) => (
+                        <li key={idx} className="exp-highlight-item">
+                          <span className="exp-bullet">—</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {exp.stack && exp.stack.length > 0 && (
+                    <p className="exp-stack">
+                      {exp.stack.map((s, idx) => (
+                        <span key={s} className="exp-stack-item">
+                          {s}
+                          {idx < exp.stack!.length - 1 ? ', ' : ''}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              </article>
+
+              {i < experiences.length - 1 && (
+                <div className="exp-fleuron" aria-hidden="true">
+                  ❦
+                </div>
+              )}
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

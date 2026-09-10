@@ -20,12 +20,15 @@ import {
   SiVite,
   SiFigma,
   SiLinux,
+  SiClaude,
+  SiOpencode,
   SiGoogledocs,
   SiGooglesheets,
   SiGoogleslides,
   SiGoogledrive,
 } from 'react-icons/si';
 import { FaFileWord, FaFileExcel, FaFilePowerpoint } from 'react-icons/fa';
+import { BsOpenai } from 'react-icons/bs';
 
 interface SkillsPageProps {
   isActive?: boolean;
@@ -45,6 +48,7 @@ const col1: LogoItem[] = [
   { Icon: SiHtml5, color: '#E34F26' },
   { Icon: FaFileWord, color: '#2B579A' },
   { Icon: SiGoogledocs, color: '#4285F4' },
+  { Icon: SiClaude, color: '#D97757' },
 ];
 
 const col2: LogoItem[] = [
@@ -57,6 +61,7 @@ const col2: LogoItem[] = [
   { Icon: FaFileExcel, color: '#217346' },
   { Icon: SiGooglesheets, color: '#0F9D58' },
   { Icon: SiGoogleslides, color: '#FFC107' },
+  { Icon: BsOpenai, color: '#10A37F' },
 ];
 
 const col3: LogoItem[] = [
@@ -68,6 +73,7 @@ const col3: LogoItem[] = [
   { Icon: SiLinux, color: '#FCC624' },
   { Icon: FaFilePowerpoint, color: '#D24726' },
   { Icon: SiGoogledrive, color: '#1FA463' },
+  { Icon: SiOpencode, color: '#6B7280' },
 ];
 
 const columns = [
