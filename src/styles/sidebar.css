@@ -1,0 +1,113 @@
+/* ─── Sidebar (Spine) ───────────────────────────────────── */
+.book-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  z-index: 100;
+  background: var(--bg-cover);
+  border-right: 1px solid var(--border-cover);
+  transition: background var(--transition-duration) var(--transition-easing),
+              border-color var(--transition-duration) var(--transition-easing);
+}
+
+.book-sidebar.light {
+  background: var(--bg-content);
+  border-right-color: var(--border-content);
+}
+
+.book-sidebar.light .sidebar-hamburger span {
+  background: var(--text-content);
+}
+
+.book-sidebar.light .sidebar-top,
+.book-sidebar.light .sidebar-bottom {
+  color: #999999;
+}
+
+.book-sidebar.light .sidebar-center {
+  color: var(--text-content);
+}
+
+/* Sticky line — flows top to bottom based on scroll */
+.sidebar-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--text-cover);
+  opacity: 0.75;
+  transform-origin: top;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.book-sidebar.light .sidebar-line {
+  background: var(--text-content);
+  opacity: 0.6;
+}
+
+.sidebar-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.sidebar-hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--text-cover);
+  transition: background var(--transition-duration) var(--transition-easing);
+}
+
+.sidebar-vertical {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  user-select: none;
+  transition: color var(--transition-duration) var(--transition-easing);
+}
+
+.sidebar-top {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.sidebar-center {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-cover);
+}
+
+.sidebar-reg {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 400;
+  display: inline-block;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.sidebar-bottom {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}

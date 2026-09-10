@@ -1,0 +1,158 @@
+/* ─── Experience Page (Chapter III — Work & Journey) ────── */
+.experience-page {
+  --font-book: 'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+
+.experience-page .chapter-subtitle {
+  font-family: var(--font-book);
+  font-style: italic;
+}
+
+/* Inner scroll — same pattern as gallery */
+.experience-scroll {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.experience-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* List + vertical spine */
+.experience-list {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 22vh 1rem 18vh 3.5rem;
+}
+
+.experience-list::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22vh;
+  bottom: 18vh;
+  width: 1px;
+  background: #d8d3c8;
+}
+
+/* Entry: grid [year] [content], hanging */
+.exp-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.exp-marker {
+  position: absolute;
+  left: -3.78rem;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50% !important;
+  background: #1f1d1b;
+}
+
+.exp-year {
+  font-family: 'Inter', var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: #8a8178;
+  text-align: right;
+  line-height: 1.5;
+  padding-top: 0.35em;
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* Role title */
+.exp-role {
+  font-family: var(--font-book);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 400;
+  color: #1f1d1b;
+  line-height: 1.2;
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* Meta: company — type, small caps */
+.exp-meta {
+  font-family: 'Inter', var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8178;
+  margin-top: 0.5rem;
+  font-variant-caps: small-caps;
+}
+
+/* Context — serif body + drop cap */
+.exp-context {
+  font-family: var(--font-book);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #33302c;
+  margin-top: 0.9rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.exp-context::first-letter {
+  font-family: var(--font-book);
+  font-size: 3.4em;
+  line-height: 0.8;
+  float: left;
+  padding: 0.08em 0.12em 0 0;
+  color: #1f1d1b;
+  font-weight: 400;
+}
+
+/* Highlights */
+.exp-highlights {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.exp-highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-family: var(--font-book);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #4a4642;
+}
+
+.exp-bullet {
+  color: #b8b3ac;
+  flex-shrink: 0;
+}
+
+/* Stack — footnote style */
+.exp-stack {
+  margin-top: 1rem;
+  font-family: var(--font-book);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #6a6560;
+  line-height: 1.5;
+}
+
+/* Fleuron separator */
+.exp-fleuron {
+  text-align: center;
+  color: #b8b3ac;
+  font-family: var(--font-book);
+  font-size: 1.15rem;
+  margin: 4.5rem 0;
+  user-select: none;
+}

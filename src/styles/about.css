@@ -1,0 +1,122 @@
+/* ─── About Page (Chapter I) ────────────────────────────── */
+.about-page {
+  background: #ffffff;
+}
+
+.about-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: calc(var(--spacing-unit) * 1.5);
+  max-width: 1040px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-lead {
+  font-family: var(--font-heading);
+  font-size: clamp(20px, 2.3vw, 32px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.about-paragraph {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #8a8178;
+}
+
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid #1f1d1b;
+  padding-bottom: 3px;
+  width: fit-content;
+  transition: opacity 0.2s ease, gap 0.2s ease;
+  margin-top: 8px;
+}
+
+.about-cta:hover {
+  opacity: 0.7;
+  gap: 12px;
+}
+
+.about-cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.about-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.about-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
+}
+
+.photo-frame {
+  position: relative;
+  background: #ebebeb;
+  border: 1px solid #dcdcdc;
+  padding: 6px 6px 0 6px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.about-photo {
+  max-width: 322px;
+  max-height: 437px;
+  object-fit: contain;
+  display: block;
+}
+
+.sticker-effect {
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.05));
+}
+
+.about-quote-block {
+  text-align: center;
+  max-width: 290px;
+}
+
+.about-pullquote {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.45;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.about-beyond {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: #8a8178;
+}

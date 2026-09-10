@@ -1,0 +1,37 @@
+/* ─── Content Pages (White Background) ──────────────────── */
+.book-page-content {
+  background: var(--bg-content);
+  color: var(--text-content);
+  justify-content: center;
+  padding: 0 var(--spacing-unit);
+}
+
+.chapter-header,
+.book-page-content > .chapter-label {
+  position: absolute;
+  top: var(--spacing-unit);
+  left: var(--spacing-unit);
+  z-index: 10;
+}
+
+.chapter-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.book-page-content .chapter-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+.chapter-subtitle {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: italic;
+  color: #1f1d1b;
+}

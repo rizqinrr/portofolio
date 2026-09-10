@@ -1,0 +1,27 @@
+/* ─── Book Layout ───────────────────────────────────────── */
+.book-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Pages Container ───────────────────────────────────── */
+.book-pages {
+  display: flex;
+  height: 100vh;
+  margin-left: var(--sidebar-width);
+  will-change: transform;
+}
+
+.book-page {
+  flex: 0 0 calc(100vw - var(--sidebar-width));
+  width: calc(100vw - var(--sidebar-width));
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-content);
+}

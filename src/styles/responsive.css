@@ -1,0 +1,122 @@
+/* ─── Responsive (max-width: 768px) ─────────────────────── */
+@media (max-width: 768px) {
+  /* Tokens override */
+  :root {
+    --sidebar-width: 62px;
+    --spacing-unit: 24px;
+  }
+
+  /* Sidebar */
+  .sidebar-center {
+    font-size: 9px;
+  }
+
+  .sidebar-top,
+  .sidebar-bottom {
+    font-size: 8px;
+  }
+
+  /* Cover */
+  .cover-name {
+    font-size: clamp(1.8rem, 8vw, 4rem);
+    letter-spacing: -0.04em;
+  }
+
+  .cover-tagline {
+    font-size: 14px;
+    max-width: 200px;
+  }
+
+  .cover-bottom-right {
+    font-size: 20px;
+  }
+
+  /* Skills */
+  .skills-marquee {
+    left: 0;
+    gap: 24px;
+  }
+
+  .skills-marquee-track {
+    gap: 24px;
+  }
+
+  .skills-logo-item svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  /* Projects */
+  .toc-leader {
+    display: none;
+  }
+
+  .toc-entry {
+    flex-wrap: wrap;
+    gap: 4px 8px;
+  }
+
+  .toc-title {
+    font-size: 16px;
+  }
+
+  .projects-split {
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-unit) * 0.5);
+  }
+
+  .projects-preview {
+    min-height: 300px;
+  }
+
+  .projects-preview-frame {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Gallery */
+  .gallery-scroll {
+    width: 100%;
+    border-left: none;
+    border-right: none;
+  }
+
+  .gallery-grid {
+    gap: 1.82rem 0.91rem;
+    padding: 10.92vh 1.1375rem;
+  }
+
+  .gallery-tile--offset {
+    padding-top: 2.73rem;
+  }
+
+  /* Experience */
+  .experience-list {
+    padding: 16vh 1rem 12vh 2.25rem;
+  }
+
+  .experience-list::before {
+    top: 16vh;
+    bottom: 12vh;
+  }
+
+  .exp-entry {
+    grid-template-columns: 2.75rem 1fr;
+    gap: 1rem;
+  }
+
+  .exp-marker {
+    left: -2.9rem;
+  }
+
+  .exp-context {
+    font-size: 1rem;
+  }
+
+  .exp-context::first-letter {
+    font-size: 2.8em;
+  }
+
+  .exp-fleuron {
+    margin: 3rem 0;
+  }
+}

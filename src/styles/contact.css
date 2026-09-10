@@ -1,0 +1,54 @@
+/* ─── Contact Page (Chapter V) ──────────────────────────── */
+.contact-email {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-content);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.contact-email:hover {
+  color: #666666;
+}
+
+.contact-socials {
+  display: flex;
+  gap: calc(var(--spacing-unit) * 0.5);
+  margin-top: calc(var(--spacing-unit) * 0.8);
+}
+
+.contact-social {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: #666666;
+  text-decoration: none;
+  position: relative;
+  transition: color 200ms ease;
+}
+
+.contact-social::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.contact-social:hover {
+  color: var(--text-content);
+}
+
+.contact-social:hover::after {
+  transform: scaleX(1);
+}

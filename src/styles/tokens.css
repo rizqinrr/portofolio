@@ -1,0 +1,16 @@
+/* ─── Design Tokens ─────────────────────────────────────── */
+:root {
+  --bg-cover: #222222;
+  --bg-content: #ffffff;
+  --text-cover: #f3ede3;
+  --text-content: #1a1a1a;
+  --text-muted: #888888;
+  --border-cover: #333333;
+  --border-content: #e5e5e5;
+  --sidebar-width: 62px;
+  --spacing-unit: 50px;
+  --font-heading: 'Playfair Display', 'PP Editorial Old', serif;
+  --font-body: 'Inter', 'PP Neue Montreal', sans-serif;
+  --transition-duration: 200ms;
+  --transition-easing: cubic-bezier(0.2, 0, 0, 1);
+}

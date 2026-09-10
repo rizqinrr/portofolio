@@ -1,0 +1,12 @@
+/* ─── Page Indicator ────────────────────────────────────── */
+.book-page-indicator {
+  position: absolute;
+  bottom: var(--spacing-unit);
+  right: var(--spacing-unit);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--text-content);
+  z-index: 10;
+}
