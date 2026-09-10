@@ -34,7 +34,7 @@ export default function Sidebar({ isLight, scrollProgress }: SidebarProps) {
 
       {/* Vertical text — center */}
       <div className="sidebar-vertical sidebar-center">
-        muhammad rizqi nurrahman ™
+        MUHAMMAD RIZQI NURRAHMAN <span className="sidebar-reg">®</span>
       </div>
 
       {/* Vertical text — bottom */}

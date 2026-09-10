@@ -1,13 +1,26 @@
 export interface Project {
   id: string;
   title: string;
+  status: 'Production' | 'In Development' | 'Academic Project';
+  year: string;
   description: string;
-  category: string;
-  tags: string[];
+  stack: string[];
+  highlights: string[];
   image: string;
-  githubUrl?: string;
   demoUrl?: string;
-  featured?: boolean;
+  githubUrl?: string;
+  caseStudyUrl?: string;
+}
+
+export interface Experience {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  type: 'Full Time' | 'Freelance' | 'Internship' | 'Volunteer';
+  context: string;
+  highlights: string[];
+  stack?: string[];
 }
 
 export interface NavItem {

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import Sidebar from './Sidebar';
@@ -13,12 +14,24 @@ import ContactPage from '../../pages/contents/ContactPage';
 const TOTAL_PAGES = 7;
 
 export default function BookLayout() {
-  const { contentX, scrollProgress, currentPage, goToPage, containerRef } = useHorizontalScroll({
+  const { contentX, smoothScrollX, scrollProgress, currentPage, goToPage, containerRef, pageWidth } = useHorizontalScroll({
     totalPages: TOTAL_PAGES,
   });
 
-  // Determine if current page is light (content pages 1-5)
-  const isLight = currentPage >= 1 && currentPage <= 5;
+  // Switch theme exactly when the dividing line touches the sidebar edge
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = smoothScrollX.on('change', (pos) => {
+      if (pageWidth <= 0) return;
+      // Front cover is from 0 to pageWidth. At pos >= pageWidth - 4, page 1 touches the sidebar.
+      // Pages 1 to 5 are light (totalPages - 1 = 6 is BackCover). At pos >= 6 * pageWidth - 4, back cover touches sidebar.
+      const lightActive = pos >= pageWidth - 4 && pos < (TOTAL_PAGES - 1) * pageWidth - 4;
+      setIsLight(lightActive);
+    });
+
+    return unsubscribe;
+  }, [smoothScrollX, pageWidth]);
 
   return (
     <div className="book-layout" ref={containerRef}>
@@ -34,12 +47,12 @@ export default function BookLayout() {
         style={{ x: contentX }}
       >
         <FrontCover />
-        <AboutPage />
-        <SkillsPage />
-        <ProjectsPage />
-        <ExperiencePage />
-        <ContactPage />
-        <BackCover />
+        <AboutPage isActive={currentPage === 1} />
+        <ProjectsPage isActive={currentPage === 2} />
+        <ExperiencePage isActive={currentPage === 3} />
+        <SkillsPage isActive={currentPage === 4} />
+        <ContactPage isActive={currentPage === 5} />
+        <BackCover isActive={currentPage === TOTAL_PAGES - 1} />
       </motion.div>
 
       <PageIndicator current={currentPage} total={TOTAL_PAGES} />

@@ -1,4 +1,10 @@
-export default function BackCover() {
+import { Signature } from '../../components/ui/Signature';
+
+interface BackCoverProps {
+  isActive?: boolean;
+}
+
+export default function BackCover({ isActive = true }: BackCoverProps) {
   return (
     <div className="book-page colophon-page">
       <div className="colophon-content">
@@ -10,6 +16,18 @@ export default function BackCover() {
         <p className="colophon-closing">
           "this page intentionally left blank."
         </p>
+      </div>
+
+      <div className="signature-wrapper">
+        <Signature
+          text="Muhammad Rizqi Nurrahman"
+          color="#f3ede3"
+          fontSize={30}
+          duration={1.8}
+          delay={0.3}
+          isActive={isActive}
+          className="signature-svg"
+        />
       </div>
     </div>
   );
