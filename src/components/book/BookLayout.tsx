@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
 import Sidebar from './Sidebar';
 import PageIndicator from './PageIndicator';
+import PageArrows from './PageArrows';
 import FrontCover from '../../pages/cover/FrontCover';
 import BackCover from '../../pages/cover/BackCover';
 import AboutPage from '../../pages/contents/AboutPage';
@@ -58,6 +59,12 @@ export default function BookLayout() {
       </motion.div>
 
       <PageIndicator current={currentPage} total={TOTAL_PAGES} />
+
+      <PageArrows
+        currentPage={currentPage}
+        totalPages={TOTAL_PAGES}
+        onNavigate={goToPage}
+      />
     </div>
   );
 }

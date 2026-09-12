@@ -5,13 +5,23 @@ interface UseHorizontalScrollOptions {
   totalPages: number;
 }
 
+/** Read the sidebar width from CSS so JS and layout never drift apart. */
+function readSidebarWidth(): number {
+  if (typeof window === 'undefined') return 0;
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue('--sidebar-width')
+    .trim();
+  const parsed = parseFloat(raw);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) {
   const [currentPage, setCurrentPage] = useState(0);
   const [activePages, setActivePages] = useState<boolean[]>(
     () => Array(totalPages).fill(false).map((_, i) => i === 0)
   );
   const [pageWidth, setPageWidth] = useState(() =>
-    typeof window !== 'undefined' ? window.innerWidth - 62 : 0
+    typeof window !== 'undefined' ? window.innerWidth - readSidebarWidth() : 0
   );
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number>(0);
@@ -20,7 +30,7 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
   // Keep track of window resize
   useEffect(() => {
     const handleResize = () => {
-      setPageWidth(window.innerWidth - 62);
+      setPageWidth(window.innerWidth - readSidebarWidth());
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -110,14 +120,18 @@ export function useHorizontalScroll({ totalPages }: UseHorizontalScrollOptions) 
     const handleTouchMove = (e: TouchEvent) => {
       const deltaX = touchStartX.current - e.touches[0].clientX;
       const deltaY = touchStartY.current - e.touches[0].clientY;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
 
       // Nested vertical scroller — let native vertical scroll win inside it.
       const inner = (e.target as Element)?.closest?.('[data-inner-scroll]') as HTMLElement | null;
-      if (inner && Math.abs(deltaY) >= Math.abs(deltaX)) {
+      if (inner && absY >= absX) {
         return;
       }
 
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      // Require a minimum travel and clear horizontal dominance so a finger
+      // drifting sideways mid-scroll doesn't hijack the vertical gesture.
+      if (absX > 12 && absX > absY * 1.5) {
         e.preventDefault();
         const newPos = Math.max(0, Math.min(touchStartPos + deltaX, maxScroll));
         rawScrollX.set(newPos);
