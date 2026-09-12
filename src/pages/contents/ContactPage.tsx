@@ -16,8 +16,8 @@ export default function ContactPage({ isActive = false }: ContactPageProps) {
         <span className="chapter-label">Chapter V</span>
         <span className="chapter-subtitle">Next chapter</span>
       </motion.div>
-      <a href="mailto:hello@rizqinr.dev" className="contact-email">
-        hello@rizqinr.dev
+      <a href="mailto:studyrizqi@gmail.com" className="contact-email">
+        studyrizqi@gmail.com
       </a>
       <div className="contact-socials">
         <a
@@ -29,7 +29,7 @@ export default function ContactPage({ isActive = false }: ContactPageProps) {
           github
         </a>
         <a
-          href="https://linkedin.com/in/rizqinrr"
+          href="https://www.linkedin.com/in/riznv/"
           target="_blank"
           rel="noopener noreferrer"
           className="contact-social"
@@ -37,12 +37,12 @@ export default function ContactPage({ isActive = false }: ContactPageProps) {
           linkedin
         </a>
         <a
-          href="https://twitter.com/rizqinrr"
+          href="https://www.instagram.com/rzqiinrr/"
           target="_blank"
           rel="noopener noreferrer"
           className="contact-social"
         >
-          twitter
+          instagram
         </a>
       </div>
     </div>

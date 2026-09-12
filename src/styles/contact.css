@@ -7,11 +7,29 @@
   line-height: 1.1;
   color: var(--text-content);
   text-decoration: none;
+  position: relative;
   transition: color 200ms ease;
+}
+
+.contact-email::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .contact-email:hover {
   color: #666666;
+}
+
+.contact-email:hover::after {
+  transform: scaleX(1);
 }
 
 .contact-socials {
