@@ -17,3 +17,6 @@ dist-ssr
 
 # Vite build info
 *.tsbuildinfo
+
+# Generated PDF
+public/portfolio.pdf

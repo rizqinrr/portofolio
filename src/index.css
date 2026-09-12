@@ -13,6 +13,7 @@
 @import './styles/experience.css';
 @import './styles/page-indicator.css';
 @import './styles/responsive.css';
+@import './styles/print.css';
 
 @tailwind base;
 @tailwind components;

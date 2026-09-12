@@ -81,12 +81,13 @@
   }
 
   .gallery-grid {
-    gap: 1.82rem 0.91rem;
-    padding: 10.92vh 1.1375rem;
+    gap: 2rem;
+    padding: 10vh 1rem;
+    max-width: 100%;
   }
 
   .gallery-tile--offset {
-    padding-top: 2.73rem;
+    padding-top: 0;
   }
 
   /* Experience */
