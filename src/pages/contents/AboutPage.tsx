@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { getAssetUrl } from '../../utils/assets';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -84,7 +85,7 @@ export default function AboutPage({ isActive = false }: AboutPageProps) {
           <motion.div className="about-photo-wrapper" variants={photoVariants}>
             <div className="photo-frame sticker-effect">
               <img
-                src="/assets/jpg/foto1nobg.png"
+                src={getAssetUrl('assets/jpg/foto1nobg.png')}
                 alt="Muhammad Rizqi"
                 className="about-photo"
               />

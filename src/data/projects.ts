@@ -1,4 +1,5 @@
 import { Project, Experience } from '../types';
+import { getAssetUrl } from '../utils/assets';
 
 export const projects: Project[] = [
   {
@@ -15,7 +16,7 @@ export const projects: Project[] = [
       'Queue job untuk proses berat & audit trail activity log',
       'Deploy ke VPS via Docker container',
     ],
-    image: '/assets/images/projects/sip_pkbm.png',
+    image: getAssetUrl('assets/images/projects/sip_pkbm.png'),
     githubUrl: 'https://github.com/rizqinrr/sip_pkbm',
   },
   {
@@ -31,7 +32,7 @@ export const projects: Project[] = [
       'Shared Zod schemas antara frontend dan backend',
       'App Router (Next.js) + REST API (Express + TypeScript)',
     ],
-    image: '/assets/images/projects/lms_ncourse.png',
+    image: getAssetUrl('assets/images/projects/lms_ncourse.png'),
     githubUrl: 'https://github.com/rizqinrr/nurman-course',
   },
   {
@@ -47,7 +48,7 @@ export const projects: Project[] = [
       'Showcase & full-text search (tsvector, GIN index, pg_trgm)',
       'Blog, docs, admin panel (Filament) & member dashboard',
     ],
-    image: '/assets/images/projects/ngomongin_ai.png',
+    image: getAssetUrl('assets/images/projects/ngomongin_ai.png'),
     githubUrl: 'https://github.com/rizqinrr/ngomonginAI',
   },
   {
@@ -63,7 +64,7 @@ export const projects: Project[] = [
       'Guardrails & portal pemakaian (usage portal)',
       'Dukungan per-provider: OpenAI, Anthropic, NVIDIA, Ollama, dll',
     ],
-    image: '/assets/images/projects/nvr_router.png',
+    image: getAssetUrl('assets/images/projects/nvr_router.png'),
     githubUrl: 'https://github.com/rizqinrr/nvrRouter',
   },
 ];
