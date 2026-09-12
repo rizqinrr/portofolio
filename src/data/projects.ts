@@ -91,10 +91,10 @@ export const experiences: Experience[] = [
     type: 'Freelance',
     context: 'Bimbingan privat komputer dan coding secara mandiri.',
     highlights: [
-      'Mengelola 5 peserta aktif secara mandiri',
+      'Mengelola sistem pembelajaran secara mandiri',
       'Menyusun laporan perkembangan untuk orang tua',
     ],
-    stack: ['Computer Literacy', 'Python', 'Web Development'],
+    stack: ['Computer Literacy', 'Web Development'],
   },
   {
     id: 'backend-dev-baracipta',

@@ -5,7 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === 'production' ? '/portofolio/' : '/',
+  base: process.env.VERCEL ? '/' : (mode === 'production' ? '/portofolio/' : '/'),
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
