@@ -34,8 +34,8 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 22vh;
-  bottom: 18vh;
+  top: 0;
+  bottom: 0;
   width: 1px;
   background: #d8d3c8;
 }

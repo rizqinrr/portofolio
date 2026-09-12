@@ -95,8 +95,8 @@
   }
 
   .experience-list::before {
-    top: 16vh;
-    bottom: 12vh;
+    top: 0;
+    bottom: 0;
   }
 
   .exp-entry {
