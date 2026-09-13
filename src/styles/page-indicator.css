@@ -10,3 +10,43 @@
   color: var(--text-content);
   z-index: 10;
 }
+
+/* ─── Page arrows (mobile navigation) ───────────────────── */
+.page-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  width: 40px;
+  height: 40px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--text-content);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--border-content);
+  cursor: pointer;
+  transition: background var(--transition-duration) var(--transition-easing);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page-arrow-prev {
+  left: 12px;
+}
+
+.page-arrow-next {
+  right: 12px;
+}
+
+.page-arrow:active {
+  background: rgba(240, 240, 240, 0.95);
+}
+
+@media (max-width: 768px) {
+  .page-arrow {
+    display: flex;
+  }
+}

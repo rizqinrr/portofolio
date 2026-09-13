@@ -1,49 +1,110 @@
 /* ─── Responsive (max-width: 768px) ─────────────────────── */
 @media (max-width: 768px) {
-  /* Tokens override */
+  /* Tokens override — sidebar is removed entirely on mobile so pages get
+     the full viewport width. */
   :root {
-    --sidebar-width: 62px;
+    --sidebar-width: 0px;
     --spacing-unit: 24px;
   }
 
   /* Sidebar */
-  .sidebar-center {
-    font-size: 9px;
-  }
-
-  .sidebar-top,
-  .sidebar-bottom {
-    font-size: 8px;
+  .book-sidebar {
+    display: none;
   }
 
   /* Cover */
   .cover-name {
-    font-size: clamp(1.8rem, 8vw, 4rem);
+    font-size: clamp(2.4rem, 13vw, 4rem);
     letter-spacing: -0.04em;
   }
 
   .cover-tagline {
-    font-size: 14px;
+    font-size: 13px;
     max-width: 200px;
+  }
+
+  .cover-bottom-bar {
+    padding: 18px 24px;
+    gap: 12px;
+  }
+
+  .cover-bottom-left,
+  .cover-bottom-center {
+    font-size: 10.5px;
   }
 
   .cover-bottom-right {
     font-size: 20px;
   }
 
+  .signature-svg {
+    max-width: 240px;
+  }
+
+  .signature-wrapper {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .colophon-content {
+    max-width: 100%;
+  }
+
+  .colophon-line {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .colophon-closing {
+    font-size: 14px;
+    margin-top: 24px;
+  }
+
+  /* About — single column, photo first */
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-aside {
+    order: -1;
+    gap: 18px;
+  }
+
+  .photo-frame {
+    padding: 5px 5px 0;
+  }
+
+  .about-photo {
+    max-width: 100%;
+    max-height: 38dvh;
+    width: auto;
+  }
+
+  .about-content {
+    gap: 18px;
+  }
+
+  .about-quote-block {
+    max-width: 100%;
+  }
+
   /* Skills */
   .skills-marquee {
     left: 0;
-    gap: 24px;
+    right: 0;
+    top: 84px;
+    gap: 16px;
+    padding: 0;
   }
 
   .skills-marquee-track {
-    gap: 24px;
+    gap: 22px;
   }
 
   .skills-logo-item svg {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
   }
 
   /* Projects */
@@ -57,6 +118,7 @@
   }
 
   .toc-title {
+    flex: 1;
     font-size: 16px;
   }
 
@@ -65,12 +127,22 @@
     gap: calc(var(--spacing-unit) * 0.5);
   }
 
+  /* Hover preview has no meaning on touch — hide it entirely. */
   .projects-preview {
-    min-height: 300px;
+    display: none;
   }
 
-  .projects-preview-frame {
-    aspect-ratio: 16 / 9;
+  /* Contact */
+  .contact-email {
+    font-size: clamp(1.1rem, 5.5vw, 4rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .contact-socials {
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 28px;
   }
 
   /* Gallery */
@@ -81,12 +153,13 @@
   }
 
   .gallery-grid {
-    gap: 1.82rem 0.91rem;
-    padding: 10.92vh 1.1375rem;
+    gap: 2rem;
+    padding: 10vh 1rem;
+    max-width: 100%;
   }
 
   .gallery-tile--offset {
-    padding-top: 2.73rem;
+    padding-top: 0;
   }
 
   /* Experience */

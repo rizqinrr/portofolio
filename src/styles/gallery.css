@@ -7,7 +7,8 @@
 
 .gallery-scroll {
   height: 100vh;
-  width: min(100%, 64rem);
+  height: 100dvh;
+  width: min(100%, 48rem);
   margin: 0 auto;
   background: #ebebeb;
   border-left: 1px solid var(--border-content);
@@ -31,12 +32,12 @@
 .gallery-grid {
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: start;
-  gap: 3.64rem 2.275rem;
+  gap: 3.5rem;
   width: 100%;
-  max-width: 58.24rem;
-  padding: 16.38vh 2.275rem;
+  max-width: 36rem;
+  padding: 14vh 1.5rem;
 }
 
 .gallery-tile {
@@ -45,7 +46,7 @@
 }
 
 .gallery-tile--offset {
-  padding-top: 5.46rem;
+  padding-top: 0;
 }
 
 .gallery-tile-frame {

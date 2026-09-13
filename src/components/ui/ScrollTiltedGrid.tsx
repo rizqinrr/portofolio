@@ -166,6 +166,38 @@ export function ScrollTiltedGrid({
   );
   const scrollerRef = useRef<HTMLElement | null>(null);
   const appendLock = useRef(false);
+  const hoveringRef = useRef(false);
+  const speedRef = useRef(1.0);
+
+  // Auto-scroll loop (slow, with hover slowdown like skills marquee)
+  useEffect(() => {
+    if (reduceMotion) return;
+    const scroller = scrollerRef.current?.closest('[data-inner-scroll]') as HTMLElement | null;
+    if (!scroller) return;
+
+    let rafId: number;
+    let accumulated = 0;
+
+    const tick = () => {
+      const targetSpeed = hoveringRef.current ? 0.2 : 0.9;
+      speedRef.current += (targetSpeed - speedRef.current) * 0.05;
+
+      accumulated += speedRef.current;
+      if (accumulated >= 1) {
+        const step = Math.floor(accumulated);
+        scroller.scrollTop += step;
+        accumulated -= step;
+      }
+
+      rafId = window.requestAnimationFrame(tick);
+    };
+
+    rafId = window.requestAnimationFrame(tick);
+
+    return () => {
+      window.cancelAnimationFrame(rafId);
+    };
+  }, [reduceMotion]);
 
   // Reset cycle count when inputs change
   useEffect(() => {
@@ -209,6 +241,12 @@ export function ScrollTiltedGrid({
       ref={scrollerRef}
       className={`gallery-section${className ? ` ${className}` : ''}`}
       aria-label="Scroll-reactive image gallery"
+      onMouseEnter={() => {
+        hoveringRef.current = true;
+      }}
+      onMouseLeave={() => {
+        hoveringRef.current = false;
+      }}
     >
       <div className="gallery-grid" style={{ paddingBlock: sectionPadding }}>
         {tiles.map(({ globalIndex, image }) => (

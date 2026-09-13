@@ -2,6 +2,7 @@
 .book-layout {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   position: relative;
@@ -11,6 +12,7 @@
 .book-pages {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   margin-left: var(--sidebar-width);
   will-change: transform;
 }
@@ -19,6 +21,7 @@
   flex: 0 0 calc(100vw - var(--sidebar-width));
   width: calc(100vw - var(--sidebar-width));
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   position: relative;
   display: flex;
